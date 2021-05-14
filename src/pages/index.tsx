@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { Flex, Box, Text, Heading, Image } from "@chakra-ui/react";
+import { HomeCallButton } from "../components/HomeCallButton";
 
 export default function Home() {
   return (
@@ -38,12 +39,13 @@ export default function Home() {
             knowledge.
           </Heading>
 
-          <Text fontSize="1.5rem" lineHeight="1.5rem" mt="1.5rem" as="p">
+          <Text fontSize="1.5rem" lineHeight="1.5rem" mt="1.5rem" mb="2.5rem">
             Get access to all the posts <br />
-            <Text color="cyan.500" fontWeight="bold" as="span">
+            <Text color="cyan.500" fontWeight="bold" mt="0.5rem">
               for free
             </Text>
           </Text>
+          <HomeCallButton />
         </Box>
 
         <Image src="/images/avatar.svg" alt="Man coding" boxSize="400px" />

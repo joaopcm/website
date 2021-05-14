@@ -1,5 +1,5 @@
 import { Box, Text, Link } from "@chakra-ui/react";
-import { CallButton } from "../CallButton";
+import { CallButton } from "./CallButton";
 import styles from "./styles.module.scss";
 
 export function Header() {
