@@ -1,4 +1,4 @@
-import { Box, Text, Link } from "@chakra-ui/react";
+import { Box, Text, Link, Tag } from "@chakra-ui/react";
 import { CallButton } from "./CallButton";
 import styles from "./styles.module.scss";
 
@@ -11,6 +11,9 @@ export function Header() {
           <Text color="cyan.500" as="span" ml="1">
             .
           </Text>
+          <Tag size="sm" borderRadius="full">
+            Beta
+          </Tag>
         </Text>
 
         <nav>

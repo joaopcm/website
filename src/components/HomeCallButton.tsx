@@ -1,6 +1,13 @@
 import { Button } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 export function HomeCallButton() {
+  const router = useRouter();
+
+  function handleClick() {
+    router.push("/posts");
+  }
+
   return (
     <Button
       h="4rem"
@@ -18,6 +25,7 @@ export function HomeCallButton() {
       _hover={{
         filter: "brightness(0.8)",
       }}
+      onClick={handleClick}
     >
       Read all contents
     </Button>
