@@ -1,6 +1,9 @@
+import Prismic from "@prismicio/client";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import { Box, Link, Text } from "@chakra-ui/react";
 import styles from "./posts.module.scss";
+import { getPrismicClient } from "../../services/prismic";
 
 export default function Posts() {
   return (
@@ -46,3 +49,18 @@ export default function Posts() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const prismic = getPrismicClient();
+
+  const response = await prismic.query(
+    [Prismic.Predicates.at("document.type", "post")],
+    { fetch: ["post.title", "post.content"], pageSize: 25 }
+  );
+
+  console.log(response);
+
+  return {
+    props: {},
+  };
+};
