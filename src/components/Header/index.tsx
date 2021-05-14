@@ -1,5 +1,5 @@
 import { Box, Text, Tag } from "@chakra-ui/react";
-import { ActiveLink } from "../ActiveLink";
+import { ActiveLink } from "./ActiveLink";
 import { CallButton } from "./CallButton";
 import styles from "./styles.module.scss";
 
@@ -18,7 +18,11 @@ export function Header() {
         </Text>
 
         <nav>
-          <ActiveLink href="/" activeClassName={styles.active}>
+          <ActiveLink
+            href="/"
+            activeClassName={styles.active}
+            shouldMatchExactHref
+          >
             <a>Home</a>
           </ActiveLink>
           <ActiveLink href="/posts" activeClassName={styles.active}>
