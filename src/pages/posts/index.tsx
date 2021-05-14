@@ -2,10 +2,22 @@ import Prismic from "@prismicio/client";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import { Box, Link, Text } from "@chakra-ui/react";
+import { RichText } from "prismic-dom";
 import styles from "./posts.module.scss";
 import { getPrismicClient } from "../../services/prismic";
 
-export default function Posts() {
+interface PostsProps {
+  posts: Post[];
+}
+
+type Post = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  updatedAt: string;
+};
+
+export default function Posts({ posts }: PostsProps) {
   return (
     <>
       <Head>
@@ -20,30 +32,37 @@ export default function Posts() {
           mb="0"
           className={styles.postsWrapper}
         >
-          <Link display="block" href="#" _hover={{ textDecoration: "none" }}>
-            <Text
-              as="time"
-              fontSize="1rem"
-              display="flex"
-              align="center"
-              color="gray.300"
-            >
-              March 12th 2021
-            </Text>
-            <Text
-              as="strong"
+          {posts.map((post) => (
+            <Link
+              key={post.slug}
               display="block"
-              fontSize="1.5rem"
-              mt="1rem"
-              lineHeight="2rem"
-              transition="color 0.2s"
+              href="#"
+              _hover={{ textDecoration: "none" }}
             >
-              Lorem impsum dolor
-            </Text>
-            <Text as="p" color="gray.300" mt="0.5rem" lineHeight="1.625rem">
-              Lorem impsum dolor sit amet, consectetur adipiscing elit
-            </Text>
-          </Link>
+              <Text
+                as="time"
+                fontSize="1rem"
+                display="flex"
+                align="center"
+                color="gray.300"
+              >
+                {post.updatedAt}
+              </Text>
+              <Text
+                as="strong"
+                display="block"
+                fontSize="1.5rem"
+                mt="1rem"
+                lineHeight="2rem"
+                transition="color 0.2s"
+              >
+                {post.title}
+              </Text>
+              <Text as="p" color="gray.300" mt="0.5rem" lineHeight="1.625rem">
+                {post.excerpt}
+              </Text>
+            </Link>
+          ))}
         </Box>
       </Box>
     </>
@@ -58,9 +77,25 @@ export const getStaticProps: GetStaticProps = async () => {
     { fetch: ["post.title", "post.content"], pageSize: 25 }
   );
 
-  console.log(response);
+  const posts = response.results.map((post) => ({
+    slug: post.uid,
+    title: RichText.asText(post.data.title),
+    excerpt:
+      post.data.content.find((content) => content.type === "paragraph")?.text ??
+      "",
+    updatedAt: new Date(post.last_publication_date).toLocaleDateString(
+      "en-US",
+      {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }
+    ),
+  }));
 
   return {
-    props: {},
+    props: {
+      posts,
+    },
   };
 };
