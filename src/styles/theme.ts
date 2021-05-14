@@ -4,6 +4,7 @@ export const theme = extendTheme({
   colors: {
     gray: {
       "900": "#121214",
+      "850": "#1f2729",
       "800": "#29292e",
       "300": "#a8a8b3",
       "100": "#e1e1e6",
@@ -17,8 +18,8 @@ export const theme = extendTheme({
     },
   },
   fonts: {
-    heading: "Poppins",
-    body: "Poppins",
+    heading: "Roboto",
+    body: "Roboto",
   },
   styles: {
     global: {
