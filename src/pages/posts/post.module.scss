@@ -1,0 +1,22 @@
+.contentInterpolator {
+  p,
+  ul {
+    margin: 1.5rem 0;
+  }
+
+  ul {
+    padding-left: 1.5rem;
+  }
+
+  pre {
+    background: var(--chakra-colors-gray-850);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    line-height: 1.25rem;
+  }
+
+  a {
+    color: var(--chakra-colors-yellow-500);
+    text-decoration: underline;
+  }
+}
