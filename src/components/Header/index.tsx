@@ -1,5 +1,5 @@
-import { Box, Text, Link as ChakraLink, Tag } from "@chakra-ui/react";
-import Link from "next/link";
+import { Box, Text, Tag } from "@chakra-ui/react";
+import { ActiveLink } from "../ActiveLink";
 import { CallButton } from "./CallButton";
 import styles from "./styles.module.scss";
 
@@ -18,25 +18,12 @@ export function Header() {
         </Text>
 
         <nav>
-          <ChakraLink
-            as={Link}
-            href="/"
-            className={styles.active}
-            _hover={{
-              textDecoration: "none",
-            }}
-          >
-            Home
-          </ChakraLink>
-          <ChakraLink
-            as={Link}
-            href="/posts"
-            _hover={{
-              textDecoration: "none",
-            }}
-          >
-            Posts
-          </ChakraLink>
+          <ActiveLink href="/" activeClassName={styles.active}>
+            <a>Home</a>
+          </ActiveLink>
+          <ActiveLink href="/posts" activeClassName={styles.active}>
+            <a>Posts</a>
+          </ActiveLink>
         </nav>
 
         <CallButton />
