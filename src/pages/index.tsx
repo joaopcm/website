@@ -1,8 +1,20 @@
 import Head from "next/head";
-import { Flex, Box, Text, Heading, Image } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  Text,
+  Heading,
+  Image,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { HomeCallButton } from "../components/HomeCallButton";
 
 export default function Home() {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
   return (
     <>
       <Head>
@@ -27,10 +39,10 @@ export default function Home() {
 
           <Heading
             as="h1"
-            fontSize="4.5rem"
-            lineHeight="4.5rem"
+            fontSize={["3rem", "4.5rem"]}
+            lineHeight={["3rem", "4.5rem"]}
             fontWeight="900"
-            mt="2.5rem"
+            mt={["1.5rem", "2.5rem"]}
           >
             Know me and{" "}
             <Text color="cyan.500" as="span">
@@ -39,16 +51,24 @@ export default function Home() {
             knowledge.
           </Heading>
 
-          <Text fontSize="1.5rem" lineHeight="1.5rem" mt="1.5rem" mb="2.5rem">
+          <Text
+            fontSize={["1rem", "1.5rem"]}
+            lineHeight={["1rem", "1.5rem"]}
+            mt={["1rem", "1.5rem"]}
+            mb={["1.5rem", "2.5rem"]}
+          >
             Get access to all the posts <br />
-            <Text color="cyan.500" fontWeight="bold" mt="0.5rem">
+            <Text color="cyan.500" fontWeight="bold" mt="0.5rem" as="span">
               for free
             </Text>
           </Text>
+
           <HomeCallButton />
         </Box>
 
-        <Image src="/images/avatar.svg" alt="Man coding" boxSize="400px" />
+        {isWideVersion && (
+          <Image src="/images/avatar.svg" alt="Man coding" boxSize="400px" />
+        )}
       </Flex>
     </>
   );

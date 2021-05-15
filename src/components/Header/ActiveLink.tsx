@@ -4,29 +4,42 @@ import { cloneElement, ReactElement } from "react";
 
 interface ActiveLinkProps extends LinkProps {
   children: ReactElement;
-  activeClassName: string;
+  activeClassName?: string;
   shouldMatchExactHref?: boolean;
 }
 
 export function ActiveLink({
   children,
-  activeClassName,
+  activeClassName = null,
   shouldMatchExactHref = false,
   ...rest
 }: ActiveLinkProps) {
   const { asPath } = useRouter();
-  let className = "";
+  let isActive = false;
 
   if (shouldMatchExactHref && (asPath === rest.href || asPath === rest.as)) {
-    className = activeClassName;
+    isActive = true;
   }
 
   if (
     !shouldMatchExactHref &&
     (asPath.startsWith(String(rest.href)) || asPath.startsWith(String(rest.as)))
   ) {
-    className = activeClassName;
+    isActive = true;
   }
 
-  return <Link {...rest}>{cloneElement(children, { className })}</Link>;
+  let styles = {
+    className: null,
+    color: null,
+  };
+
+  if (isActive) {
+    if (activeClassName) {
+      styles.className = activeClassName;
+    } else {
+      styles.color = "yellow.500";
+    }
+  }
+
+  return <Link {...rest}>{cloneElement(children, styles)}</Link>;
 }

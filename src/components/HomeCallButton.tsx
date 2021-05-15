@@ -11,7 +11,7 @@ export function HomeCallButton() {
   return (
     <Button
       h="4rem"
-      w="260px"
+      w={["100%", "260px"]}
       border="0"
       borderRadius="2rem"
       bg="yellow.500"

@@ -24,8 +24,19 @@ export default function Post({ post }: PostProps) {
       </Head>
 
       <Box maxWidth="1120px" my="0" mx="auto" py="0" px="2rem">
-        <Text as="article" maxWidth="720px" mt="5rem" mx="auto" mb="0">
-          <Text as="h1" fontSize="3.5rem" fontWeight="900">
+        <Text
+          as="article"
+          maxWidth="720px"
+          mt={["2rem", "5rem"]}
+          mx="auto"
+          mb="0"
+        >
+          <Text
+            as="h1"
+            fontSize={["2.5rem", "3.5rem"]}
+            lineHeight={["3rem", "4rem"]}
+            fontWeight="900"
+          >
             {post.title}
           </Text>
 
@@ -41,9 +52,9 @@ export default function Post({ post }: PostProps) {
 
           <Box
             className={styles.contentInterpolator}
-            mt="2rem"
-            lineHeight="2rem"
-            fontSize="1.125rem"
+            mt="1.5rem"
+            lineHeight={["1.5rem", "2rem"]}
+            fontSize={["1rem", "1.125rem"]}
             color="gray.100"
           >
             <RichText
@@ -57,10 +68,7 @@ export default function Post({ post }: PostProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-  params,
-}) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { slug } = params;
   const prismic = getPrismicClient();
 
