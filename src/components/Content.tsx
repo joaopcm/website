@@ -4,11 +4,16 @@ import { ReactNode } from "react";
 interface ContentProps {
   children: ReactNode;
   className?: string;
+  maxWidth?: string;
 }
 
-export function Content({ children, className }: ContentProps) {
+export function Content({
+  children,
+  className,
+  maxWidth = "720px",
+}: ContentProps) {
   return (
-    <Box maxWidth="720px" mt="5rem" mx="auto" mb="0" className={className}>
+    <Box maxWidth={maxWidth} mt="5rem" mx="auto" mb="0" className={className}>
       {children}
     </Box>
   );
