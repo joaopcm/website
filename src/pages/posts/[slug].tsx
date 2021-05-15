@@ -5,7 +5,7 @@ import { SEO } from "../../components/SEO";
 import { getPrismicClient } from "../../services/prismic";
 import { formatDate } from "../../utils/formatDate";
 import { htmlSerializer } from "../../utils/htmlSerializer";
-import styles from "./post.module.scss";
+import styles from "../../styles/contentInterpolator.module.scss";
 
 interface PostProps {
   post: {

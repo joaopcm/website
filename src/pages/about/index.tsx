@@ -54,6 +54,7 @@ import { Card } from "../../components/Card";
 import { getPrismicClient } from "../../services/prismic";
 import { htmlSerializer } from "../../utils/htmlSerializer";
 import { SEO } from "../../components/SEO";
+import styles from "../../styles/contentInterpolator.module.scss";
 
 interface AboutProps {
   aboutMe: RichTextBlock[];
@@ -117,7 +118,11 @@ export default function About({ aboutMe }: AboutProps) {
                   About me
                 </Heading>
 
-                <Box my="8" pl={[null, "4"]}>
+                <Box
+                  my="8"
+                  pl={[null, "4"]}
+                  className={styles.contentInterpolator}
+                >
                   <RichText render={aboutMe} htmlSerializer={htmlSerializer} />
                 </Box>
 
