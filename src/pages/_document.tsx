@@ -11,6 +11,23 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="icon" href="/images/favicon.ico" />
+
+          {/* Google Analytics */}
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-6XSQF30DHW"
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+              
+                gtag('config', 'G-6XSQF30DHW');
+              `,
+            }}
+          />
         </Head>
         <body>
           <Main />
