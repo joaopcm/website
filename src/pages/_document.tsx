@@ -15,8 +15,8 @@ export default class MyDocument extends Document {
           {/* Google Analytics */}
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=G-6XSQF30DHW"
-          ></script>
+            src="https://www.googletagmanager.com/gtag/js?id=G-GH5M4BWX6R"
+          />
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -24,7 +24,7 @@ export default class MyDocument extends Document {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
               
-                gtag('config', 'G-6XSQF30DHW');
+                gtag('config', 'G-GH5M4BWX6R');
               `,
             }}
           />
