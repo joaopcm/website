@@ -1,30 +1,34 @@
 import { Flex, Icon, Tooltip } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
-interface ProgrammingLanguageIconProps {
+interface TechnologyItemProps {
   label: string;
   icon: IconType;
   backgroundColor?: string;
   color?: string;
+  iconSize?: string;
+  boxSize?: string;
 }
 
-export function ProgrammingLanguageIcon({
+export function TechnologyItem({
   label,
   icon,
   backgroundColor = "white",
   color = "white",
-}: ProgrammingLanguageIconProps) {
+  iconSize = "20px",
+  boxSize = "32px",
+}: TechnologyItemProps) {
   return (
     <Tooltip label={label} aria-label={label} placement="top">
       <Flex
         bg={backgroundColor}
-        w="32px"
-        h="32px"
+        w={boxSize}
+        h={boxSize}
         borderRadius="5px"
         align="center"
         justify="center"
       >
-        <Icon as={icon} w="20px" h="20px" color={color} />
+        <Icon as={icon} w={iconSize} h={iconSize} color={color} />
       </Flex>
     </Tooltip>
   );

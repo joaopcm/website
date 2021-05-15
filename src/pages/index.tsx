@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import {
   Flex,
   Box,
@@ -6,8 +7,8 @@ import {
   Heading,
   Image,
   useBreakpointValue,
+  Button as ChakraButton,
 } from "@chakra-ui/react";
-import { HomeCallButton } from "../components/HomeCallButton";
 
 export default function Home() {
   const isWideVersion = useBreakpointValue({
@@ -63,7 +64,27 @@ export default function Home() {
             </Text>
           </Text>
 
-          <HomeCallButton />
+          <Link href="/posts">
+            <ChakraButton
+              h="4rem"
+              w={["100%", "260px"]}
+              border="0"
+              borderRadius="2rem"
+              bg="yellow.500"
+              color="gray.900"
+              fontSize="1.12rem"
+              fontWeight="bold"
+              display="flex"
+              align="center"
+              justify="center"
+              transition="filter 0.2s"
+              _hover={{
+                filter: "brightness(0.8)",
+              }}
+            >
+              Read all contents
+            </ChakraButton>
+          </Link>
         </Box>
 
         {isWideVersion && (

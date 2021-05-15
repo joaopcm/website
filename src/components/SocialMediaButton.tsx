@@ -26,7 +26,7 @@ export function SocialMediaButton({
     >
       <Flex align="center" justify="center">
         <Icon as={icon} mr="3" w="20px" h="20px" />
-        <Text>{title}</Text>
+        <Text fontSize="0.9rem">{title}</Text>
       </Flex>
     </Link>
   );

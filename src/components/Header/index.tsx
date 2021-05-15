@@ -6,20 +6,27 @@ import {
   IconButton,
   Icon,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { FaNewspaper } from "react-icons/fa";
 import { RiMenuLine } from "react-icons/ri";
 import { useMenuDrawer } from "../../contexts/MenuDrawerContext";
 import { ActiveLink } from "./ActiveLink";
-import { CallButton } from "./CallButton";
+import { Button } from "../Button";
 import { Sidebar } from "./Sidebar";
 import styles from "./styles.module.scss";
 
 export function Header() {
   const { onOpen } = useMenuDrawer();
+  const router = useRouter();
 
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
+
+  function handleClick() {
+    router.push("/posts");
+  }
 
   return (
     <header className={styles.headerContainer}>
@@ -69,7 +76,15 @@ export function Header() {
           <Sidebar />
         )}
 
-        {isWideVersion && <CallButton />}
+        {isWideVersion && (
+          <Button
+            backgroundColor="gray.850"
+            icon={FaNewspaper}
+            text="See the latest posts"
+            onClick={handleClick}
+            iconColor="#04d361"
+          />
+        )}
       </Box>
     </header>
   );
