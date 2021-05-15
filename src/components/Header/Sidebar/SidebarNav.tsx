@@ -1,26 +1,85 @@
-import { Stack } from "@chakra-ui/react";
+import { Box, Stack, useBreakpointValue } from "@chakra-ui/react";
 import { FaHome, FaNewspaper, FaProjectDiagram } from "react-icons/fa";
 import { BsFillPersonFill } from "react-icons/bs";
 import { NavSection } from "./NavSection";
 import { NavLink } from "./NavLink";
+import styles from "../styles.module.scss";
 
 export function SidebarNav() {
+  const isWideScreen = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
+  const routes = [
+    {
+      section: "GENERAL",
+      path: "/",
+      icon: FaHome,
+      shouldMatchExactHref: true,
+      text: "Home",
+    },
+    {
+      section: "BLOG",
+      path: "/posts",
+      icon: FaNewspaper,
+      shouldMatchExactHref: false,
+      text: "Posts",
+    },
+    {
+      section: "PORTFOLIO",
+      path: "/projects",
+      icon: FaProjectDiagram,
+      shouldMatchExactHref: false,
+      text: "Projects",
+    },
+    {
+      section: "PORTFOLIO",
+      path: "/about",
+      icon: BsFillPersonFill,
+      shouldMatchExactHref: false,
+      text: "About me",
+    },
+  ];
+  const sections = Array.from(new Set(routes.map((route) => route.section)));
+
+  if (!isWideScreen) {
+    return (
+      <Stack spacing="10" algin="flex-start">
+        {sections.map((section, index) => (
+          <NavSection key={index} title={section}>
+            {routes.flatMap((route) =>
+              route.section === section ? (
+                <NavLink
+                  key={route.path}
+                  href={route.path}
+                  icon={route.icon}
+                  shouldMatchExactHref={route.shouldMatchExactHref}
+                >
+                  {route.text}
+                </NavLink>
+              ) : (
+                []
+              )
+            )}
+          </NavSection>
+        ))}
+      </Stack>
+    );
+  }
+
   return (
-    <Stack spacing="12" algin="flex-start">
-      <NavSection title="GENERAL">
-        <NavLink href="/" icon={FaHome} shouldMatchExactHref>
-          Home
+    <Box as="nav">
+      {routes.map((route) => (
+        <NavLink
+          key={route.path}
+          href={route.path}
+          shouldMatchExactHref={route.shouldMatchExactHref}
+          activeClassName={styles.active}
+        >
+          {route.text}
         </NavLink>
-        <NavLink href="/posts" icon={FaNewspaper}>
-          Posts
-        </NavLink>
-        <NavLink href="/projects" icon={FaProjectDiagram}>
-          Projects
-        </NavLink>
-        <NavLink href="/about" icon={BsFillPersonFill}>
-          About me
-        </NavLink>
-      </NavSection>
-    </Stack>
+      ))}
+    </Box>
   );
 }

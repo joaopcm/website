@@ -3,7 +3,7 @@ import { IconType } from "react-icons";
 
 interface ButtonProps {
   backgroundColor?: string;
-  onClick: () => void;
+  onClick?: () => void;
   icon?: IconType;
   iconColor?: string;
   text: string;
@@ -12,7 +12,7 @@ interface ButtonProps {
 
 export function Button({
   backgroundColor = "gray.800",
-  onClick,
+  onClick = () => {},
   icon,
   iconColor = "white",
   text,
