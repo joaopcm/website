@@ -13,6 +13,7 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@prismicio/client": "^4.0.0",
+    "axios": "^0.21.1",
     "framer-motion": "^4.1.16",
     "next": "10.2.0",
     "prismic-dom": "^2.2.5",

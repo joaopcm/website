@@ -58,6 +58,12 @@ export function Header() {
             <ActiveLink href="/posts" activeClassName={styles.active}>
               <a>Posts</a>
             </ActiveLink>
+            <ActiveLink href="/projects" activeClassName={styles.active}>
+              <a>Projects</a>
+            </ActiveLink>
+            <ActiveLink href="/about" activeClassName={styles.active}>
+              <a>About me</a>
+            </ActiveLink>
           </nav>
         ) : (
           <Sidebar />

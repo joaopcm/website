@@ -1,0 +1,13 @@
+.projectsWrapper {
+  a {
+    & + a {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--chakra-colors-gray-700);
+    }
+
+    &:hover strong {
+      color: var(--chakra-colors-yellow-500);
+    }
+  }
+}

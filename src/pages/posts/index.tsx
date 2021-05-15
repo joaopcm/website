@@ -2,11 +2,13 @@ import Prismic from "@prismicio/client";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { Box, Link as ChakraLink, Text } from "@chakra-ui/react";
+import { Link as ChakraLink, Text } from "@chakra-ui/react";
 import { RichText } from "prismic-dom";
-import styles from "./posts.module.scss";
 import { getPrismicClient } from "../../services/prismic";
 import { formatDate } from "../../utils/formatDate";
+import { Container } from "../../components/Container";
+import { Content } from "../../components/Content";
+import styles from "./posts.module.scss";
 
 interface PostsProps {
   posts: Post[];
@@ -26,14 +28,8 @@ export default function Posts({ posts }: PostsProps) {
         <title>Posts | Joao Melo</title>
       </Head>
 
-      <Box maxWidth="1120px" my="0" mx="auto" py="0" px="2rem">
-        <Box
-          maxWidth="720px"
-          mt="5rem"
-          mx="auto"
-          mb="0"
-          className={styles.postsWrapper}
-        >
+      <Container>
+        <Content className={styles.postsWrapper}>
           {posts.map((post) => (
             <Link key={post.slug} href={`/posts/${post.slug}`}>
               <ChakraLink display="block" _hover={{ textDecoration: "none" }}>
@@ -62,8 +58,8 @@ export default function Posts({ posts }: PostsProps) {
               </ChakraLink>
             </Link>
           ))}
-        </Box>
-      </Box>
+        </Content>
+      </Container>
     </>
   );
 }
@@ -89,5 +85,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       posts,
     },
+    revalidate: 60 * 60 * 1, // 1 hour
   };
 };
