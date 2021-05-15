@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Link from "next/link";
 import {
   Flex,
@@ -9,6 +8,7 @@ import {
   useBreakpointValue,
   Button as ChakraButton,
 } from "@chakra-ui/react";
+import { SEO } from "../components/SEO";
 
 export default function Home() {
   const isWideVersion = useBreakpointValue({
@@ -18,9 +18,7 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Home | Joao Melo</title>
-      </Head>
+      <SEO title="Home | Joao Melo" />
 
       <Flex
         as="main"

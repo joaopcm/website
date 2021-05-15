@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/layout";
 import { GetServerSideProps } from "next";
-import Head from "next/head";
 import { RichText, RichTextBlock } from "prismic-reactjs";
+import { SEO } from "../../components/SEO";
 import { getPrismicClient } from "../../services/prismic";
 import { formatDate } from "../../utils/formatDate";
 import { htmlSerializer } from "../../utils/htmlSerializer";
@@ -19,9 +19,13 @@ interface PostProps {
 export default function Post({ post }: PostProps) {
   return (
     <>
-      <Head>
-        <title>{post.title} | Joao Melo</title>
-      </Head>
+      <SEO
+        title={`${post.title} | Joao Melo`}
+        description={
+          post.content.find((content) => content.type === "paragraph")?.text ??
+          ""
+        }
+      />
 
       <Box maxWidth="1120px" my="0" mx="auto" py="0" px="2rem">
         <Text

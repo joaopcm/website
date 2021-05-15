@@ -8,11 +8,11 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
-import Head from "next/head";
 import { FaJs, FaHtml5, FaPython, FaCss3 } from "react-icons/fa";
 import { SiTypescript, SiFlutter, SiShell } from "react-icons/si";
 import { Container } from "../../components/Container";
 import { Content } from "../../components/Content";
+import { SEO } from "../../components/SEO";
 import { githubAPI } from "../../services/github";
 import { formatDate } from "../../utils/formatDate";
 import styles from "./projects.module.scss";
@@ -66,9 +66,10 @@ export default function Projects({ projects }: ProjectsProps) {
 
   return (
     <>
-      <Head>
-        <title>Projects | Joao Melo</title>
-      </Head>
+      <SEO
+        title="Projects | Joao Melo"
+        description="All of my open source projects"
+      />
 
       <Container>
         <Content className={styles.projectsWrapper}>

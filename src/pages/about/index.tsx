@@ -10,7 +10,6 @@ import {
   Stack,
   Box,
 } from "@chakra-ui/react";
-import Head from "next/head";
 import { RichText, RichTextBlock } from "prismic-reactjs";
 import Prismic from "@prismicio/client";
 import {
@@ -54,6 +53,7 @@ import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
 import { getPrismicClient } from "../../services/prismic";
 import { htmlSerializer } from "../../utils/htmlSerializer";
+import { SEO } from "../../components/SEO";
 
 interface AboutProps {
   aboutMe: RichTextBlock[];
@@ -68,9 +68,10 @@ export default function About({ aboutMe }: AboutProps) {
 
   return (
     <>
-      <Head>
-        <title>About me | Joao Melo</title>
-      </Head>
+      <SEO
+        title="About me | Joao Melo"
+        description="Find out more about me, my career, technologies I master and my interests"
+      />
 
       <Container>
         <Content maxWidth="100%">

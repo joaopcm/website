@@ -1,6 +1,5 @@
 import Prismic from "@prismicio/client";
 import { GetStaticProps } from "next";
-import Head from "next/head";
 import Link from "next/link";
 import { Link as ChakraLink, Text } from "@chakra-ui/react";
 import { RichText } from "prismic-dom";
@@ -9,6 +8,7 @@ import { formatDate } from "../../utils/formatDate";
 import { Container } from "../../components/Container";
 import { Content } from "../../components/Content";
 import styles from "./posts.module.scss";
+import { SEO } from "../../components/SEO";
 
 interface PostsProps {
   posts: Post[];
@@ -24,9 +24,10 @@ type Post = {
 export default function Posts({ posts }: PostsProps) {
   return (
     <>
-      <Head>
-        <title>Posts | Joao Melo</title>
-      </Head>
+      <SEO
+        title="Posts | Joao Melo"
+        description="Technology publications from zero to hero. For free."
+      />
 
       <Container>
         <Content className={styles.postsWrapper}>
