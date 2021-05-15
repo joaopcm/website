@@ -11,6 +11,8 @@ import {
   Box,
 } from "@chakra-ui/react";
 import Head from "next/head";
+import { RichText, RichTextBlock } from "prismic-reactjs";
+import Prismic from "@prismicio/client";
 import {
   FaAws,
   FaDocker,
@@ -43,15 +45,21 @@ import {
 } from "react-icons/si";
 import { BsEnvelopeFill } from "react-icons/bs";
 import { RiEyeFill } from "react-icons/ri";
-
+import { GetStaticProps } from "next";
 import { Container } from "../../components/Container";
 import { Content } from "../../components/Content";
 import { TechnologyItem } from "../../components/TechnologyItem";
 import { SocialMediaButton } from "../../components/SocialMediaButton";
 import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
+import { getPrismicClient } from "../../services/prismic";
+import { htmlSerializer } from "../../utils/htmlSerializer";
 
-export default function About() {
+interface AboutProps {
+  aboutMe: RichTextBlock[];
+}
+
+export default function About({ aboutMe }: AboutProps) {
   function handleDownloadResume() {
     window.open(
       "https://drive.google.com/file/d/1J0OcU4OJKOKX_6cJ9wCRXlDJXmPIjmzV/view?usp=sharing"
@@ -108,18 +116,9 @@ export default function About() {
                   About me
                 </Heading>
 
-                <Text my="8" pl="4">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  pretium nisl eu sem gravida imperdiet. Sed a ante et diam
-                  fermentum tempor. Fusce sed facilisis ligula. Ut eu magna et
-                  urna porttitor sollicitudin et vitae nulla. Duis dapibus eros
-                  dui, nec posuere neque gravida vel. In lectus lectus, dictum
-                  id pharetra eget, lobortis eu arcu. Morbi dictum egestas
-                  sollicitudin. Quisque ac mi in sapien vehicula tristique.
-                  Nullam consectetur facilisis odio, eu pulvinar neque rhoncus
-                  et. Nulla feugiat, enim vel pretium posuere, arcu libero
-                  efficitur dolor, pulvinar lacinia libero arcu eu dui.
-                </Text>
+                <Box my="8" pl={[null, "4"]}>
+                  <RichText render={aboutMe} htmlSerializer={htmlSerializer} />
+                </Box>
 
                 <Stack direction={["column", null, null, "row"]}>
                   <SocialMediaButton
@@ -347,3 +346,21 @@ export default function About() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const prismic = getPrismicClient();
+
+  const response = await prismic.query(
+    [Prismic.Predicates.at("document.type", "about_me")],
+    { fetch: ["about_me.content"], pageSize: 1 }
+  );
+
+  const aboutMe = response.results[0]?.data.content;
+
+  return {
+    props: {
+      aboutMe,
+    },
+    revalidate: 60 * 60 * 24, // 24 hours
+  };
+};
