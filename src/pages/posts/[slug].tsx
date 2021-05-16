@@ -4,6 +4,7 @@ import {
   Text,
   Image,
   useBreakpointValue,
+  Divider,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { RichText, RichTextBlock } from "prismic-reactjs";
@@ -18,6 +19,7 @@ import { Container } from "../../components/Container";
 import { Content } from "../../components/Content";
 import { PostInfo } from "../../components/Post/PostInfo";
 import { PostInfoItem } from "../../components/Post/PostInfoItem";
+import { Comments } from "../../components/Comments";
 
 interface PostProps {
   post: {
@@ -102,6 +104,10 @@ export default function Post({ post }: PostProps) {
               ))}
             </Box>
           </Text>
+
+          <Divider borderColor="gray.600" mt="3.75rem" mb="3rem" />
+
+          <Comments />
         </Content>
       </Container>
     </>
