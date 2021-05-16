@@ -1,13 +1,15 @@
 import Prismic from "@prismicio/client";
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import { HStack, Link as ChakraLink, Text, Icon, Flex } from "@chakra-ui/react";
+import { Link as ChakraLink, Text } from "@chakra-ui/react";
 import { FiCalendar, FiUser } from "react-icons/fi";
 import { getPrismicClient } from "../../services/prismic";
 import { formatDate } from "../../utils/formatDate";
 import { Container } from "../../components/Container";
 import { Content } from "../../components/Content";
 import { SEO } from "../../components/SEO";
+import { PostInfo } from "../../components/Post/PostInfo";
+import { PostInfoItem } from "../../components/Post/PostInfoItem";
 import styles from "./posts.module.scss";
 
 interface PostsProps {
@@ -48,33 +50,11 @@ export default function Posts({ posts }: PostsProps) {
                 <Text as="p" color="gray.300" mt="0.5rem" lineHeight="1.625rem">
                   {post.subtitle}
                 </Text>
-                <HStack mt="25px" spacing="1.5rem">
-                  <Flex align="center" justify="center" color="gray.300">
-                    <Icon as={FiCalendar} mr="0.65625rem" />
-                    <Text
-                      as="span"
-                      fontSize="0.875rem"
-                      lineHeight="0.875rem"
-                      display="flex"
-                      align="center"
-                    >
-                      {post.createdAt}
-                    </Text>
-                  </Flex>
 
-                  <Flex align="center" justify="center" color="gray.300">
-                    <Icon as={FiUser} mr="0.65625rem" w="20px" h="20px" />
-                    <Text
-                      as="span"
-                      fontSize="0.875rem"
-                      lineHeight="0.875rem"
-                      display="flex"
-                      align="center"
-                    >
-                      {post.author}
-                    </Text>
-                  </Flex>
-                </HStack>
+                <PostInfo>
+                  <PostInfoItem icon={FiCalendar} text={post.createdAt} />
+                  <PostInfoItem icon={FiUser} text={post.author} />
+                </PostInfo>
               </ChakraLink>
             </Link>
           ))}
