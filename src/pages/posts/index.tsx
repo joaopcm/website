@@ -1,14 +1,14 @@
 import Prismic from "@prismicio/client";
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import { Link as ChakraLink, Text } from "@chakra-ui/react";
-import { RichText } from "prismic-dom";
+import { HStack, Link as ChakraLink, Text, Icon, Flex } from "@chakra-ui/react";
+import { FiCalendar, FiUser } from "react-icons/fi";
 import { getPrismicClient } from "../../services/prismic";
 import { formatDate } from "../../utils/formatDate";
 import { Container } from "../../components/Container";
 import { Content } from "../../components/Content";
-import styles from "./posts.module.scss";
 import { SEO } from "../../components/SEO";
+import styles from "./posts.module.scss";
 
 interface PostsProps {
   posts: Post[];
@@ -16,9 +16,10 @@ interface PostsProps {
 
 type Post = {
   slug: string;
-  title: string;
-  excerpt: string;
-  updatedAt: string;
+  headline: string;
+  subtitle: string;
+  author: string;
+  createdAt: string;
 };
 
 export default function Posts({ posts }: PostsProps) {
@@ -35,15 +36,6 @@ export default function Posts({ posts }: PostsProps) {
             <Link key={post.slug} href={`/posts/${post.slug}`}>
               <ChakraLink display="block" _hover={{ textDecoration: "none" }}>
                 <Text
-                  as="time"
-                  fontSize="1rem"
-                  display="flex"
-                  align="center"
-                  color="gray.300"
-                >
-                  {post.updatedAt}
-                </Text>
-                <Text
                   as="strong"
                   display="block"
                   fontSize="1.5rem"
@@ -51,11 +43,38 @@ export default function Posts({ posts }: PostsProps) {
                   lineHeight="2rem"
                   transition="color 0.2s"
                 >
-                  {post.title}
+                  {post.headline}
                 </Text>
                 <Text as="p" color="gray.300" mt="0.5rem" lineHeight="1.625rem">
-                  {post.excerpt}
+                  {post.subtitle}
                 </Text>
+                <HStack mt="25px" spacing="1.5rem">
+                  <Flex align="center" justify="center" color="gray.300">
+                    <Icon as={FiCalendar} mr="0.65625rem" />
+                    <Text
+                      as="span"
+                      fontSize="0.875rem"
+                      lineHeight="0.875rem"
+                      display="flex"
+                      align="center"
+                    >
+                      {post.createdAt}
+                    </Text>
+                  </Flex>
+
+                  <Flex align="center" justify="center" color="gray.300">
+                    <Icon as={FiUser} mr="0.65625rem" w="20px" h="20px" />
+                    <Text
+                      as="span"
+                      fontSize="0.875rem"
+                      lineHeight="0.875rem"
+                      display="flex"
+                      align="center"
+                    >
+                      {post.author}
+                    </Text>
+                  </Flex>
+                </HStack>
               </ChakraLink>
             </Link>
           ))}
@@ -70,16 +89,18 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const response = await prismic.query(
     [Prismic.Predicates.at("document.type", "post")],
-    { fetch: ["post.title", "post.content"], pageSize: 25 }
+    {
+      fetch: ["post.headline", "post.subtitle", "post.author"],
+      pageSize: 25,
+    }
   );
 
   const posts = response.results.map((post) => ({
     slug: post.uid,
-    title: RichText.asText(post.data.title),
-    excerpt:
-      post.data.content.find((content) => content.type === "paragraph")?.text ??
-      "",
-    updatedAt: formatDate(post.last_publication_date),
+    headline: post.data.headline,
+    subtitle: post.data.subtitle,
+    author: post.data.author,
+    createdAt: formatDate(post.first_publication_date),
   }));
 
   return {
