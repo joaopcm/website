@@ -1,7 +1,7 @@
 import Prismic from "@prismicio/client";
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import { Link as ChakraLink, Text } from "@chakra-ui/react";
+import { Center, Link as ChakraLink, Text } from "@chakra-ui/react";
 import { FiCalendar, FiUser } from "react-icons/fi";
 import { getPrismicClient } from "../../services/prismic";
 import { formatDate } from "../../utils/formatDate";
@@ -11,9 +11,11 @@ import { SEO } from "../../components/SEO";
 import { PostInfo } from "../../components/Post/PostInfo";
 import { PostInfoItem } from "../../components/Post/PostInfoItem";
 import styles from "./posts.module.scss";
+import { Button } from "../../components/Button";
 
 interface PostsProps {
   posts: Post[];
+  preview?: boolean;
 }
 
 type Post = {
@@ -24,7 +26,7 @@ type Post = {
   createdAt: string;
 };
 
-export default function Posts({ posts }: PostsProps) {
+export default function Posts({ posts, preview }: PostsProps) {
   return (
     <>
       <SEO
@@ -58,13 +60,28 @@ export default function Posts({ posts }: PostsProps) {
               </ChakraLink>
             </Link>
           ))}
+
+          {preview && (
+            <Center mt="2.5rem">
+              <Link href="/api/exit-preview">
+                <Button
+                  text="Exit preview mode"
+                  backgroundColor="white"
+                  textColor="gray.900"
+                />
+              </Link>
+            </Center>
+          )}
         </Content>
       </Container>
     </>
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({
+  preview = false,
+  previewData,
+}) => {
   const prismic = getPrismicClient();
 
   const response = await prismic.query(
@@ -72,6 +89,7 @@ export const getStaticProps: GetStaticProps = async () => {
     {
       fetch: ["post.headline", "post.subtitle", "post.author"],
       pageSize: 25,
+      ref: (typeof previewData === "object" && previewData["ref"]) ?? null,
     }
   );
 
@@ -86,6 +104,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       posts,
+      preview,
     },
     revalidate: 60 * 60 * 1, // 1 hour
   };
