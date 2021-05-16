@@ -1,5 +1,5 @@
-import { Text, VStack, Link as ChakraLink, Box } from "@chakra-ui/react";
-import Link from "next/link";
+import { Text, VStack, Box } from "@chakra-ui/react";
+import { Link } from "../Link";
 
 interface PostNavigationItemProps {
   post?: Post;
@@ -20,15 +20,13 @@ export function PostNavigationItem({
   return (
     <Box>
       {post && (
-        <Link href={`/posts/${post.slug}`}>
-          <ChakraLink _hover={{ textDecoration: "none" }}>
-            <VStack alignItems={alignItems}>
-              <Text fontSize="1.125rem">{post.headline}</Text>
-              <Text color="yellow.500" fontWeight="bold">
-                {description}
-              </Text>
-            </VStack>
-          </ChakraLink>
+        <Link href="/posts/[slug]" as={`/posts/${post.slug}`}>
+          <VStack alignItems={alignItems}>
+            <Text fontSize="1.125rem">{post.headline}</Text>
+            <Text color="yellow.500" fontWeight="bold">
+              {description}
+            </Text>
+          </VStack>
         </Link>
       )}
     </Box>

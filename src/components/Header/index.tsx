@@ -1,11 +1,4 @@
-import {
-  Box,
-  useBreakpointValue,
-  IconButton,
-  Icon,
-  Link as ChakraLink,
-} from "@chakra-ui/react";
-import Link from "next/link";
+import { Box, useBreakpointValue, IconButton, Icon } from "@chakra-ui/react";
 import { FaNewspaper } from "react-icons/fa";
 import { RiMenuLine } from "react-icons/ri";
 import { useMenuDrawer } from "../../contexts/MenuDrawerContext";
@@ -14,6 +7,7 @@ import { Sidebar } from "./Sidebar";
 import { Logo } from "./Logo";
 import { SidebarNav } from "./Sidebar/SidebarNav";
 import styles from "./styles.module.scss";
+import { Link } from "../Link";
 
 export function Header() {
   const { onOpen } = useMenuDrawer();
@@ -44,15 +38,13 @@ export function Header() {
         {isWideVersion ? <SidebarNav /> : <Sidebar />}
 
         {isWideVersion && (
-          <Link href="/posts">
-            <ChakraLink _hover={{ textDecoration: "none" }}>
-              <Button
-                backgroundColor="gray.850"
-                icon={FaNewspaper}
-                text="See the latest posts"
-                iconColor="#04d361"
-              />
-            </ChakraLink>
+          <Link href="/posts" as="/posts">
+            <Button
+              backgroundColor="gray.850"
+              icon={FaNewspaper}
+              text="See the latest posts"
+              iconColor="#04d361"
+            />
           </Link>
         )}
       </Box>

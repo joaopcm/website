@@ -1,7 +1,6 @@
 import {
   Text,
   Icon,
-  Link,
   Tag,
   TagLabel,
   Box,
@@ -12,6 +11,7 @@ import { FaJs, FaHtml5, FaPython, FaCss3 } from "react-icons/fa";
 import { SiTypescript, SiFlutter, SiShell } from "react-icons/si";
 import { Container } from "../../components/Container";
 import { Content } from "../../components/Content";
+import { Link } from "../../components/Link";
 import { SEO } from "../../components/SEO";
 import { githubAPI } from "../../services/github";
 import { formatDate } from "../../utils/formatDate";
@@ -75,8 +75,9 @@ export default function Projects({ projects }: ProjectsProps) {
         <Content className={styles.projectsWrapper}>
           {projects.map((project) => (
             <Link
-              href={project.url}
               key={project.id}
+              href={project.url}
+              as={project.url}
               isExternal
               display="block"
               _hover={{ textDecoration: "none" }}

@@ -11,13 +11,11 @@ import { GetServerSideProps } from "next";
 import { RichText, RichTextBlock } from "prismic-reactjs";
 import { RichText as RichTextDom } from "prismic-dom";
 import { FiCalendar, FiClock, FiUser } from "react-icons/fi";
-import Link from "next/link";
 import Prismic from "@prismicio/client";
 import { SEO } from "../../components/SEO";
 import { getPrismicClient } from "../../services/prismic";
 import { formatDate } from "../../utils/formatDate";
 import { htmlSerializer } from "../../utils/htmlSerializer";
-import styles from "../../styles/contentInterpolator.module.scss";
 import { Container } from "../../components/Container";
 import { Content } from "../../components/Content";
 import { PostInfo } from "../../components/Post/PostInfo";
@@ -25,6 +23,8 @@ import { PostInfoItem } from "../../components/Post/PostInfoItem";
 import { Comments } from "../../components/Comments";
 import { Button } from "../../components/Button";
 import { PostNavigation } from "../../components/Post/PostNavigation";
+import styles from "../../styles/contentInterpolator.module.scss";
+import { Link } from "../../components/Link";
 
 interface PostProps {
   post: {
@@ -137,7 +137,7 @@ export default function Post({
 
           {preview && (
             <Center mb="1.5rem">
-              <Link href="/api/exit-preview">
+              <Link href="/api/exit-preview" as="/api/exit-preview">
                 <Button
                   text="Exit preview mode"
                   backgroundColor="white"

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   Flex,
   Box,
@@ -8,6 +7,7 @@ import {
   useBreakpointValue,
   Button as ChakraButton,
 } from "@chakra-ui/react";
+import { Link } from "../components/Link";
 import { SEO } from "../components/SEO";
 
 export default function Home() {
@@ -62,7 +62,7 @@ export default function Home() {
             </Text>
           </Text>
 
-          <Link href="/posts">
+          <Link href="/posts" as="/posts">
             <ChakraButton
               h="4rem"
               w={["100%", "260px"]}

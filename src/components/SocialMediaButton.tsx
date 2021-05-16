@@ -1,5 +1,6 @@
-import { Flex, Icon, Link, Text } from "@chakra-ui/react";
+import { Flex, Icon, Text } from "@chakra-ui/react";
 import { IconType } from "react-icons";
+import { Link } from "./Link";
 
 interface SocialMediaButtonProps {
   href: string;
@@ -15,6 +16,7 @@ export function SocialMediaButton({
   return (
     <Link
       href={href}
+      as={href}
       bg="gray.700"
       p="2"
       borderRadius="5"
