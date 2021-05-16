@@ -7,6 +7,7 @@ import {
   Divider,
   Center,
 } from "@chakra-ui/react";
+import { format } from "date-fns";
 import { GetServerSideProps } from "next";
 import { RichText, RichTextBlock } from "prismic-reactjs";
 import { RichText as RichTextDom } from "prismic-dom";
@@ -38,6 +39,7 @@ interface PostProps {
     author: string;
     details: Detail[];
     createdAt: string;
+    updatedAt: string;
     readingMinutes: string;
   };
   previousPost?: PostNavigationItem;
@@ -100,6 +102,12 @@ export default function Post({
               <PostInfoItem icon={FiUser} text={post.author} />
               <PostInfoItem icon={FiClock} text={post.readingMinutes} />
             </PostInfo>
+
+            <Box mt="1.125rem">
+              <Text as="em" color="gray.300" fontSize="0.875rem">
+                {post.updatedAt}
+              </Text>
+            </Box>
 
             <Box
               className={styles.contentInterpolator}
@@ -212,6 +220,10 @@ export const getServerSideProps: GetServerSideProps = async ({
     author: response.data.author,
     details: response.data.details,
     createdAt: formatDate(response.first_publication_date),
+    updatedAt: `* edited on ${format(
+      new Date(response.last_publication_date),
+      "MMM d, yyyy, h:mmaaa"
+    )}`,
     readingMinutes: `${readingMinutes} min`,
   };
 
