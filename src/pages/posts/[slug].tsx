@@ -60,7 +60,7 @@ export default function Post({ post }: PostProps) {
         <Image
           src={post.banner.url}
           alt={post.banner.alt}
-          fallbackSrc="https://via.placeholder.com/1440x400?text=Loading+image..."
+          fallbackSrc="https://via.placeholder.com/1920x400?text=Loading+image..."
           mb="5rem"
         />
       )}
