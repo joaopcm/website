@@ -1,4 +1,10 @@
-import { Box, Heading, Text, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Image,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { RichText, RichTextBlock } from "prismic-reactjs";
 import { RichText as RichTextDom } from "prismic-dom";
@@ -35,6 +41,11 @@ type Detail = {
 };
 
 export default function Post({ post }: PostProps) {
+  const isWideScreen = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
   return (
     <>
       <SEO
@@ -43,12 +54,14 @@ export default function Post({ post }: PostProps) {
         previewImageURL={post.banner.url}
       />
 
-      <Image
-        src={post.banner.url}
-        alt={post.banner.alt}
-        fallbackSrc="https://via.placeholder.com/1440x400?text=Loading+image..."
-        mb={["2rem", "5rem"]}
-      />
+      {isWideScreen && (
+        <Image
+          src={post.banner.url}
+          alt={post.banner.alt}
+          fallbackSrc="https://via.placeholder.com/1440x400?text=Loading+image..."
+          mb="5rem"
+        />
+      )}
 
       <Container>
         <Content>

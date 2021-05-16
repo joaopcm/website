@@ -51,7 +51,7 @@ export default function Posts({ posts }: PostsProps) {
                   {post.subtitle}
                 </Text>
 
-                <PostInfo>
+                <PostInfo useResponsivity={false}>
                   <PostInfoItem icon={FiCalendar} text={post.createdAt} />
                   <PostInfoItem icon={FiUser} text={post.author} />
                 </PostInfo>

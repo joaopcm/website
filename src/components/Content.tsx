@@ -13,7 +13,13 @@ export function Content({
   maxWidth = "720px",
 }: ContentProps) {
   return (
-    <Box maxWidth={maxWidth} mt="5rem" mx="auto" mb="0" className={className}>
+    <Box
+      maxWidth={maxWidth}
+      mt={["2rem", "5rem"]}
+      mx="auto"
+      mb="0"
+      className={className}
+    >
       {children}
     </Box>
   );
