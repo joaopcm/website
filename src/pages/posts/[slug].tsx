@@ -12,6 +12,7 @@ import { RichText, RichTextBlock } from "prismic-reactjs";
 import { RichText as RichTextDom } from "prismic-dom";
 import { FiCalendar, FiClock, FiUser } from "react-icons/fi";
 import Link from "next/link";
+import Prismic from "@prismicio/client";
 import { SEO } from "../../components/SEO";
 import { getPrismicClient } from "../../services/prismic";
 import { formatDate } from "../../utils/formatDate";
@@ -23,6 +24,7 @@ import { PostInfo } from "../../components/Post/PostInfo";
 import { PostInfoItem } from "../../components/Post/PostInfoItem";
 import { Comments } from "../../components/Comments";
 import { Button } from "../../components/Button";
+import { PostNavigation } from "../../components/Post/PostNavigation";
 
 interface PostProps {
   post: {
@@ -38,6 +40,8 @@ interface PostProps {
     createdAt: string;
     readingMinutes: string;
   };
+  previousPost?: PostNavigationItem;
+  nextPost?: PostNavigationItem;
   preview?: boolean;
 }
 
@@ -46,7 +50,17 @@ type Detail = {
   body: RichTextBlock[];
 };
 
-export default function Post({ post, preview }: PostProps) {
+type PostNavigationItem = {
+  headline: string;
+  slug: string;
+};
+
+export default function Post({
+  previousPost,
+  post,
+  nextPost,
+  preview,
+}: PostProps) {
   const isWideScreen = useBreakpointValue({
     base: false,
     lg: true,
@@ -109,7 +123,16 @@ export default function Post({ post, preview }: PostProps) {
             </Box>
           </Text>
 
-          <Divider borderColor="gray.600" mt="3.75rem" mb="3rem" />
+          <Divider borderColor="gray.800" mt="3.75rem" mb="3.125rem" />
+
+          {previousPost ||
+            (nextPost && (
+              <PostNavigation
+                mb={["2.5rem", "5rem"]}
+                previousPost={previousPost}
+                nextPost={nextPost}
+              />
+            ))}
 
           <Comments />
 
@@ -142,6 +165,26 @@ export const getServerSideProps: GetServerSideProps = async ({
     ref: (typeof previewData === "object" && previewData["ref"]) ?? null,
   });
 
+  const queryPredicates = [Prismic.Predicates.at("document.type", "post")];
+  const queryOptions = {
+    fetch: ["post.headline"],
+    pageSize: 1,
+    after: response.id,
+    orderings: "[document.first_publication_date desc]",
+    ref: (typeof previewData === "object" && previewData["ref"]) ?? null,
+  };
+
+  const previousPostResponse = (
+    await prismic.query(queryPredicates, queryOptions)
+  ).results[0];
+
+  const nextPostResponse = (
+    await prismic.query(queryPredicates, {
+      ...queryOptions,
+      orderings: "[document.first_publication_date]",
+    })
+  ).results[0];
+
   const amountOfWords = response.data.details.reduce(
     (accumulator, { heading, body }) => {
       const headingWords = heading.split(" ").length;
@@ -173,9 +216,25 @@ export const getServerSideProps: GetServerSideProps = async ({
     readingMinutes: `${readingMinutes} min`,
   };
 
+  const nextPost = nextPostResponse
+    ? {
+        headline: nextPostResponse.data.headline,
+        slug: nextPostResponse.uid,
+      }
+    : null;
+
+  const previousPost = previousPostResponse
+    ? {
+        headline: previousPostResponse.data.headline,
+        slug: previousPostResponse.uid,
+      }
+    : null;
+
   return {
     props: {
       post,
+      previousPost,
+      nextPost,
       preview,
     },
   };
