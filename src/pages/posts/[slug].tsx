@@ -5,11 +5,13 @@ import {
   Image,
   useBreakpointValue,
   Divider,
+  Center,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { RichText, RichTextBlock } from "prismic-reactjs";
 import { RichText as RichTextDom } from "prismic-dom";
 import { FiCalendar, FiClock, FiUser } from "react-icons/fi";
+import Link from "next/link";
 import { SEO } from "../../components/SEO";
 import { getPrismicClient } from "../../services/prismic";
 import { formatDate } from "../../utils/formatDate";
@@ -20,6 +22,7 @@ import { Content } from "../../components/Content";
 import { PostInfo } from "../../components/Post/PostInfo";
 import { PostInfoItem } from "../../components/Post/PostInfoItem";
 import { Comments } from "../../components/Comments";
+import { Button } from "../../components/Button";
 
 interface PostProps {
   post: {
@@ -35,6 +38,7 @@ interface PostProps {
     createdAt: string;
     readingMinutes: string;
   };
+  preview?: boolean;
 }
 
 type Detail = {
@@ -42,7 +46,7 @@ type Detail = {
   body: RichTextBlock[];
 };
 
-export default function Post({ post }: PostProps) {
+export default function Post({ post, preview }: PostProps) {
   const isWideScreen = useBreakpointValue({
     base: false,
     lg: true,
@@ -108,17 +112,35 @@ export default function Post({ post }: PostProps) {
           <Divider borderColor="gray.600" mt="3.75rem" mb="3rem" />
 
           <Comments />
+
+          {preview && (
+            <Center mb="1.5rem">
+              <Link href="/api/exit-preview">
+                <Button
+                  text="Exit preview mode"
+                  backgroundColor="white"
+                  textColor="gray.900"
+                />
+              </Link>
+            </Center>
+          )}
         </Content>
       </Container>
     </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  preview = false,
+  previewData,
+}) => {
   const { slug } = params;
   const prismic = getPrismicClient();
 
-  const response = await prismic.getByUID("post", String(slug), {});
+  const response = await prismic.getByUID("post", String(slug), {
+    ref: (typeof previewData === "object" && previewData["ref"]) ?? null,
+  });
 
   const amountOfWords = response.data.details.reduce(
     (accumulator, { heading, body }) => {
@@ -154,6 +176,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   return {
     props: {
       post,
+      preview,
     },
   };
 };
