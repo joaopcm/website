@@ -86,7 +86,7 @@ export function htmlSerializer(type, element, content, children, key) {
       props = {
         src: element.url,
         alt: element.alt,
-        fallbackSrc: "https://via.placeholder.com/150",
+        fallbackSrc: "https://via.placeholder.com/500?text=Loading+image...",
       };
 
       return createElement(Image, propsWithUniqueKey(props, key));
