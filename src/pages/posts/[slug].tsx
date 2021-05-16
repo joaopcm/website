@@ -125,14 +125,13 @@ export default function Post({
 
           <Divider borderColor="gray.800" mt="3.75rem" mb="3.125rem" />
 
-          {previousPost ||
-            (nextPost && (
-              <PostNavigation
-                mb={["2.5rem", "5rem"]}
-                previousPost={previousPost}
-                nextPost={nextPost}
-              />
-            ))}
+          {(previousPost || nextPost) && (
+            <PostNavigation
+              mb={["2.5rem", "5rem"]}
+              previousPost={previousPost}
+              nextPost={nextPost}
+            />
+          )}
 
           <Comments />
 
