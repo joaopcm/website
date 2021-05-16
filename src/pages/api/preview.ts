@@ -29,5 +29,5 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     <script>window.location.href = '${redirectURL}'</script>
     </head>`
   );
-  response.end();
+  return response.end();
 };
