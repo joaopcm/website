@@ -1,7 +1,8 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { Header } from "../components/Header";
-import { MenuDrawerProvider } from "../contexts/MenuDrawerContext";
 import { theme } from "../styles/theme";
+import { MenuDrawerProvider } from "../contexts/MenuDrawerContext";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -9,6 +10,7 @@ function MyApp({ Component, pageProps }) {
       <MenuDrawerProvider>
         <Header />
         <Component {...pageProps} />
+        <Footer />
       </MenuDrawerProvider>
     </ChakraProvider>
   );

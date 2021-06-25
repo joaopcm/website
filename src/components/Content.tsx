@@ -15,7 +15,7 @@ export function Content({
   return (
     <Box
       maxWidth={maxWidth}
-      mt={["2rem", "5rem"]}
+      pt={["2rem", "5rem"]}
       mx="auto"
       mb="0"
       className={className}
