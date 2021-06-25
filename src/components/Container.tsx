@@ -13,7 +13,7 @@ export function Container({ children }: ContainerProps) {
       mx="auto"
       py="0"
       px="2rem"
-      height="calc(100vh - 5rem)"
+      minHeight="calc(100vh - 5rem)"
     >
       {children}
     </Box>
