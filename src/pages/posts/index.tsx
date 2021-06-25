@@ -10,8 +10,8 @@ import { SEO } from "../../components/SEO";
 import { PostInfo } from "../../components/Post/PostInfo";
 import { PostInfoItem } from "../../components/Post/PostInfoItem";
 import { Button } from "../../components/Button";
-import styles from "./posts.module.scss";
 import { Link } from "../../components/Link";
+import styles from "./posts.module.scss";
 
 interface PostsProps {
   posts: Post[];

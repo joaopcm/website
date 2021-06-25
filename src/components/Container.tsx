@@ -7,7 +7,14 @@ interface ContainerProps {
 
 export function Container({ children }: ContainerProps) {
   return (
-    <Box maxWidth="1120px" my="0" mx="auto" py="0" px="2rem">
+    <Box
+      maxWidth="1120px"
+      my="0"
+      mx="auto"
+      py="0"
+      px="2rem"
+      height="calc(100vh - 5rem)"
+    >
       {children}
     </Box>
   );
