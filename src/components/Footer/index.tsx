@@ -24,6 +24,12 @@ export function Footer() {
                 StackOverflow
               </FooterItem>
               <FooterItem href="mailto:jopcmelo@gmail.com">Email</FooterItem>
+              <FooterItem href="https://www.instagram.com/jopcmelo/">
+                Instagram
+              </FooterItem>
+              <FooterItem href="https://twitter.com/jopcmelo">
+                Twitter
+              </FooterItem>
             </List>
           </Box>
 
