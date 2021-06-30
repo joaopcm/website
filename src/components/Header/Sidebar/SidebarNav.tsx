@@ -33,13 +33,6 @@ export function SidebarNav() {
       shouldMatchExactHref: false,
       text: "Projects",
     },
-    {
-      section: "PORTFOLIO",
-      path: "/about",
-      icon: BsFillPersonFill,
-      shouldMatchExactHref: false,
-      text: "About me",
-    },
   ];
   const sections = Array.from(new Set(routes.map((route) => route.section)));
 
