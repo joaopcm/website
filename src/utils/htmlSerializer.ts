@@ -37,6 +37,8 @@ export function htmlSerializer(type, element, content, children, key) {
         colorScheme: "whiteAlpha",
         w: "100%",
         p: "1.5rem",
+        whiteSpace: "pre",
+        overflow: "auto",
       };
 
       return createElement(Code, propsWithUniqueKey(props, key), children);

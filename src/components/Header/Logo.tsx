@@ -1,4 +1,4 @@
-import { Tag, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 
 export function Logo() {
   return (
@@ -7,9 +7,6 @@ export function Logo() {
       <Text color="cyan.500" as="span" ml="1">
         .
       </Text>
-      <Tag size="sm" borderRadius="full">
-        Beta
-      </Tag>
     </Text>
   );
 }
