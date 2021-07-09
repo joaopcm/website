@@ -194,7 +194,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const amountOfWords = response.data.details.reduce(
     (accumulator, { heading, body }) => {
-      const headingWords = heading.split(" ").length;
+      const headingWords = heading?.split(" ").length;
       const bodyWords = RichTextDom.asText(body).split(" ").length;
 
       accumulator += headingWords + bodyWords;
