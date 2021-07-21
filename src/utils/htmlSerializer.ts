@@ -1,13 +1,14 @@
 import { createElement } from "react";
 import { Elements } from "prismic-reactjs";
 import {
-  Code,
   Heading,
   Image,
   ListItem,
   OrderedList,
   UnorderedList,
 } from "@chakra-ui/react";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { dracula } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 function propsWithUniqueKey(props, key) {
   return Object.assign(props || {}, { key });
@@ -34,14 +35,22 @@ export function htmlSerializer(type, element, content, children, key) {
       return createElement(ListItem, propsWithUniqueKey(props, key), children);
     case Elements.preformatted:
       props = {
-        colorScheme: "whiteAlpha",
-        w: "100%",
-        p: "1.5rem",
-        whiteSpace: "pre",
-        overflow: "auto",
+        language: "typescript",
+        style: dracula,
+        customStyle: {
+          fontSize: "1rem",
+          lineHeight: "1.5rem",
+          marginTop: "1rem",
+          marginBottom: "1rem",
+          padding: "1rem",
+        },
       };
 
-      return createElement(Code, propsWithUniqueKey(props, key), children);
+      return createElement(
+        SyntaxHighlighter,
+        propsWithUniqueKey(props, key),
+        element.text
+      );
     case Elements.heading1:
       props = {
         as: "h1",
