@@ -35,7 +35,6 @@ export function htmlSerializer(type, element, content, children, key) {
       return createElement(ListItem, propsWithUniqueKey(props, key), children);
     case Elements.preformatted:
       props = {
-        language: "typescript",
         style: dracula,
         customStyle: {
           fontSize: "1rem",
