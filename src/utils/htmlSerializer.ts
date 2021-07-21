@@ -46,6 +46,7 @@ export function htmlSerializer(type, element, content, children, key) {
       props = {
         as: "h1",
         size: "2xl",
+        my: "1rem",
       };
 
       return createElement(Heading, propsWithUniqueKey(props, key), children);
@@ -53,6 +54,7 @@ export function htmlSerializer(type, element, content, children, key) {
       props = {
         as: "h2",
         size: "xl",
+        my: "1rem",
       };
 
       return createElement(Heading, propsWithUniqueKey(props, key), children);
@@ -60,6 +62,7 @@ export function htmlSerializer(type, element, content, children, key) {
       props = {
         as: "h3",
         size: "lg",
+        my: "1rem",
       };
 
       return createElement(Heading, propsWithUniqueKey(props, key), children);
@@ -67,6 +70,7 @@ export function htmlSerializer(type, element, content, children, key) {
       props = {
         as: "h4",
         size: "md",
+        my: "1rem",
       };
 
       return createElement(Heading, propsWithUniqueKey(props, key), children);
@@ -74,6 +78,7 @@ export function htmlSerializer(type, element, content, children, key) {
       props = {
         as: "h5",
         size: "sm",
+        my: "1rem",
       };
 
       return createElement(Heading, propsWithUniqueKey(props, key), children);
@@ -81,6 +86,7 @@ export function htmlSerializer(type, element, content, children, key) {
       props = {
         as: "h6",
         size: "xs",
+        my: "1rem",
       };
 
       return createElement(Heading, propsWithUniqueKey(props, key), children);

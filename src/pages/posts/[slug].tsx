@@ -88,14 +88,14 @@ export default function Post({
       <Container>
         <Content>
           <Text as="article" mx="auto" mb="0">
-            <Text
+            <Heading
               as="h1"
-              fontSize={["2.5rem", "3.5rem"]}
-              lineHeight={["3rem", "4rem"]}
+              fontSize={["2rem", "3rem"]}
+              lineHeight={["2.5rem", "3.5rem"]}
               fontWeight="900"
             >
               {post.headline}
-            </Text>
+            </Heading>
 
             <PostInfo>
               <PostInfoItem icon={FiCalendar} text={post.createdAt} />
@@ -118,7 +118,7 @@ export default function Post({
             >
               {post.details.map((detail, index) => (
                 <Box key={index}>
-                  <Heading as="h1" fontSize="5xl">
+                  <Heading as="h1" fontSize={["4xl", "5xl"]}>
                     {detail.heading}
                   </Heading>
 
