@@ -16,6 +16,7 @@
     "@prismicio/client": "^4.0.0",
     "axios": "^0.21.1",
     "date-fns": "^2.21.3",
+    "faunadb": "^4.3.0",
     "framer-motion": "^4.1.16",
     "next": "10.2.0",
     "prismic-dom": "^2.2.5",

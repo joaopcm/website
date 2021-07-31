@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import { Input } from "./Input";
+import { api } from "../services/api";
 
 type SubscribeFormData = {
   email: string;
@@ -22,16 +23,16 @@ export function NewsletterSubscription() {
   });
   const { errors } = formState;
 
-  const handleSubscription: SubmitHandler<SubscribeFormData> = async (
-    values
-  ) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+  const handleSubscription: SubmitHandler<SubscribeFormData> = async ({
+    email,
+  }) => {
+    await api.post("/newsletter/subscribe", {
+      email,
+    });
 
     toast.success("You are now subscribed to the newsletter!", {
       style: { backgroundColor: "var(--chakra-colors-green-500)" },
     });
-
-    console.log(values);
 
     reset();
   };
