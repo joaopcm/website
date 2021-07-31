@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Prismic from "@prismicio/client";
 import { GetStaticProps } from "next";
 import { Center, Text } from "@chakra-ui/react";
@@ -38,9 +39,8 @@ export default function Posts({ posts, preview }: PostsProps) {
       <Container>
         <Content className={styles.postsWrapper}>
           {posts.map((post, index) => (
-            <>
+            <Fragment key={index}>
               <Link
-                key={post.slug}
                 href="/posts/[slug]"
                 as={`/posts/${post.slug}`}
                 display="block"
@@ -67,7 +67,7 @@ export default function Posts({ posts, preview }: PostsProps) {
               </Link>
 
               {posts[index + 1] && <Separator />}
-            </>
+            </Fragment>
           ))}
 
           {preview && (

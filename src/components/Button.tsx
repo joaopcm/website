@@ -1,7 +1,12 @@
-import { Button as ChakraButton, Icon, Text } from "@chakra-ui/react";
+import {
+  Button as ChakraButton,
+  Icon,
+  Text,
+  ButtonProps as ChakraButtonProps,
+} from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
-interface ButtonProps {
+interface ButtonProps extends ChakraButtonProps {
   backgroundColor?: string;
   onClick?: () => void;
   icon?: IconType;
@@ -17,6 +22,7 @@ export function Button({
   iconColor = "white",
   text,
   textColor = "white",
+  ...rest
 }: ButtonProps) {
   return (
     <ChakraButton
@@ -36,6 +42,7 @@ export function Button({
         filter: "brightness(0.8)",
       }}
       onClick={onClick}
+      {...rest}
     >
       {icon && <Icon as={icon} color={iconColor} w="20px" h="20px" mr="1rem" />}
       <Text color={textColor}>{text}</Text>
