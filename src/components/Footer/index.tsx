@@ -33,9 +33,6 @@ export function Footer() {
                 <FooterItem href="https://www.instagram.com/jopcmelo/">
                   Instagram
                 </FooterItem>
-                <FooterItem href="https://twitter.com/jopcmelo">
-                  Twitter
-                </FooterItem>
               </List>
             </Box>
 
