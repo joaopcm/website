@@ -82,6 +82,7 @@ export default function Post({
           alt={post.banner.alt}
           fallbackSrc="https://via.placeholder.com/1920x400?text=Loading+image..."
           mb="5rem"
+          width="100%"
         />
       )}
 
