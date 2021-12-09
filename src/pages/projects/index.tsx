@@ -67,7 +67,7 @@ export default function Projects({ projects }: ProjectsProps) {
   return (
     <>
       <SEO
-        title="Projects | Joao Melo"
+        title="Projects | João Melo"
         description="All of my open source projects"
       />
 

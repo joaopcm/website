@@ -70,7 +70,7 @@ export default function Post({
   return (
     <>
       <SEO
-        title={`${post.headline} | Joao Melo`}
+        title={`${post.headline} | João Melo`}
         description={post.subtitle}
         previewImageURL={post.banner.url}
       />

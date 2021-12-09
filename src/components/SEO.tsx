@@ -22,7 +22,7 @@ export function SEO({
       {previewImageURL && (
         <meta property="og:image" content={previewImageURL} key="ogimage" />
       )}
-      <meta property="og:site_name" content="Joao Melo" key="ogsitename" />
+      <meta property="og:site_name" content="João Melo" key="ogsitename" />
       <meta property="og:title" content={title} key="ogtitle" />
 
       <title>{title}</title>

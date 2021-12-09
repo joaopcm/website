@@ -32,7 +32,7 @@ export default function Posts({ posts, preview }: PostsProps) {
   return (
     <>
       <SEO
-        title="Posts | Joao Melo"
+        title="Posts | João Melo"
         description="Technology publications from zero to hero. For free."
       />
 
