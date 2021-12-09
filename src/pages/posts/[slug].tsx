@@ -21,7 +21,6 @@ import { Container } from "../../components/Container";
 import { Content } from "../../components/Content";
 import { PostInfo } from "../../components/Post/PostInfo";
 import { PostInfoItem } from "../../components/Post/PostInfoItem";
-import { Comments } from "../../components/Comments";
 import { Button } from "../../components/Button";
 import { PostNavigation } from "../../components/Post/PostNavigation";
 import styles from "../../styles/contentInterpolator.module.scss";
@@ -141,8 +140,6 @@ export default function Post({
               nextPost={nextPost}
             />
           )}
-
-          <Comments />
 
           {preview && (
             <Center mb="1.5rem">
