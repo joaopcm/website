@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <>
-      <SEO title="Home | Joao Melo" />
+      <SEO title="Home | João Melo" />
 
       <Flex
         as="main"
