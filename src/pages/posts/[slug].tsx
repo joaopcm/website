@@ -67,17 +67,19 @@ export default function Post({
     lg: true,
   });
 
+  const optimizedImageUrl = `${post.banner.url}&q=25`
+
   return (
     <>
       <SEO
         title={`${post.headline} | João Melo`}
         description={post.subtitle}
-        previewImageURL={post.banner.url}
+        previewImageURL={optimizedImageUrl}
       />
 
       {isWideScreen && (
         <Image
-          src={post.banner.url}
+          src={optimizedImageUrl}
           alt={post.banner.alt}
           fallbackSrc="https://via.placeholder.com/1920x400?text=Loading+image..."
           mb="5rem"
