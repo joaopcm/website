@@ -100,7 +100,7 @@ export function htmlSerializer(type, element, content, children, key) {
       return createElement(Heading, propsWithUniqueKey(props, key), children);
     case Elements.image:
       props = {
-        src: element.url,
+        src: `${element.url}&q=25`,
         alt: element.alt,
         my: "2rem",
         fallbackSrc: "https://via.placeholder.com/500?text=Loading+image...",
