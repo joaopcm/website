@@ -32,6 +32,10 @@ interface PostProps {
     banner: {
       alt: string;
       url: string;
+      dimensions: {
+        width: number;
+        height: number;
+      }
     };
     headline: string;
     subtitle: string;
@@ -83,7 +87,8 @@ export default function Post({
           alt={post.banner.alt}
           fallbackSrc="https://via.placeholder.com/1920x400?text=Loading+image..."
           mb="5rem"
-          width="100%"
+          width={`${post.banner.dimensions.width}px`}
+          height={`${post.banner.dimensions.height}px`}
         />
       )}
 
@@ -214,6 +219,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     banner: {
       alt: response.data.banner.alt,
       url: response.data.banner.url,
+      dimensions: response.data.banner.dimensions
     },
     headline: response.data.headline,
     subtitle: response.data.subtitle,

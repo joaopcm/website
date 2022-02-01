@@ -104,6 +104,8 @@ export function htmlSerializer(type, element, content, children, key) {
         alt: element.alt,
         my: "2rem",
         fallbackSrc: "https://via.placeholder.com/500?text=Loading+image...",
+        width: 'auto',
+        height: 'auto',
       };
 
       return createElement(Image, propsWithUniqueKey(props, key));
