@@ -1,6 +1,5 @@
 import { Box, Stack, useBreakpointValue } from "@chakra-ui/react";
 import { FaHome, FaNewspaper, FaProjectDiagram } from "react-icons/fa";
-import { BsFillPersonFill } from "react-icons/bs";
 import { NavSection } from "./NavSection";
 import { NavLink } from "./NavLink";
 import styles from "../styles.module.scss";

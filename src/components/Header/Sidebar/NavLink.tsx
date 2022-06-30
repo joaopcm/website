@@ -4,8 +4,11 @@ import {
   Icon,
   Text,
   LinkProps as ChakraLinkProps,
+  useColorMode,
 } from "@chakra-ui/react";
 import { ActiveLink } from "../ActiveLink";
+import { useRouter } from "next/router";
+import { checkIsActive } from "../../../utils/checkIsActive";
 
 interface NavLinkProps extends ChakraLinkProps {
   icon?: ElementType;
@@ -23,6 +26,15 @@ export function NavLink({
   activeClassName,
   ...rest
 }: NavLinkProps) {
+  const { colorMode } = useColorMode();
+  const { asPath } = useRouter();
+  const isActive = checkIsActive({
+    shouldMatchExactHref,
+    asPath,
+    href,
+    as: String(rest.as)
+  });
+
   return (
     <ActiveLink
       href={href}
@@ -39,7 +51,16 @@ export function NavLink({
         {...rest}
       >
         {icon && <Icon as={icon} fontSize="20" />}
-        <Text ml={icon ? 4 : 0}>{children}</Text>
+        <Text
+          transition="color 0.2s"
+          color={colorMode === 'dark' && isActive ? 'white': colorMode === 'dark' ? 'brand.gray.300' : undefined}
+          _hover={{
+            color: colorMode === 'dark' ? 'white' : undefined
+          }}
+          ml={icon ? 4 : 0}
+        >
+          {children}
+        </Text>
       </ChakraLink>
     </ActiveLink>
   );

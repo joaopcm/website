@@ -61,7 +61,8 @@ export default function Projects({ projects }: ProjectsProps) {
     CSS: "blue.500",
     TypeScript: "blue.500",
     Dart: "blue.500",
-    Shell: "green.500",
+    Shell: "brand.green.500",
+    // TODO add more languages here
   };
 
   return (
@@ -130,7 +131,7 @@ export default function Projects({ projects }: ProjectsProps) {
             )}
             <Link
               href="https://github.com/joaopcm"
-              color="yellow.500"
+              color="brand.yellow.500"
               ml="0.5rem"
               _hover={{ textDecoration: "none" }}
               isExternal

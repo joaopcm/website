@@ -6,9 +6,9 @@ interface MenuDrawerProviderProps {
   children: ReactNode;
 }
 
-type MenyDrawerContextData = UseDisclosureReturn;
+type MenuDrawerContextData = UseDisclosureReturn;
 
-const MenuDrawerContext = createContext({} as MenyDrawerContextData);
+const MenuDrawerContext = createContext({} as MenuDrawerContextData);
 
 export function MenuDrawerProvider({ children }: MenuDrawerProviderProps) {
   const disclosure = useDisclosure();

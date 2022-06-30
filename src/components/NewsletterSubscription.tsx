@@ -82,7 +82,7 @@ export function NewsletterSubscription() {
 
           <Button
             type="submit"
-            bg="yellow.500"
+            bg="brand.yellow.500"
             transition="filter 0.2s"
             _hover={{
               filter: "brightness(0.8)",

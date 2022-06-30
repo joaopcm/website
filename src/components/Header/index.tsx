@@ -1,4 +1,4 @@
-import { Box, useBreakpointValue, IconButton, Icon } from "@chakra-ui/react";
+import { Box, useBreakpointValue, IconButton, Icon, Switch, useColorMode } from "@chakra-ui/react";
 import { FaNewspaper } from "react-icons/fa";
 import { RiMenuLine } from "react-icons/ri";
 import { useMenuDrawer } from "../../contexts/MenuDrawerContext";
@@ -8,9 +8,11 @@ import { Logo } from "./Logo";
 import { SidebarNav } from "./Sidebar/SidebarNav";
 import styles from "./styles.module.scss";
 import { Link } from "../Link";
+import { theme } from "../../styles/theme";
 
 export function Header() {
   const { onOpen } = useMenuDrawer();
+  const { toggleColorMode, colorMode } = useColorMode();
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -37,13 +39,15 @@ export function Header() {
 
         {isWideVersion ? <SidebarNav /> : <Sidebar />}
 
+        <Switch size='lg' onChange={toggleColorMode} isChecked={colorMode === 'light'} />
+
         {isWideVersion && (
           <Link href="/posts" as="/posts">
             <Button
               backgroundColor="gray.850"
               icon={FaNewspaper}
               text="See the latest posts"
-              iconColor="#04d361"
+              iconColor="brand.green.500"
             />
           </Link>
         )}
