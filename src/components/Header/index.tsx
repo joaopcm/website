@@ -1,4 +1,11 @@
-import { Box, useBreakpointValue, IconButton, Icon, Switch, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  useBreakpointValue,
+  IconButton,
+  Icon,
+  Switch,
+  useColorMode,
+} from "@chakra-ui/react";
 import { FaNewspaper } from "react-icons/fa";
 import { RiMenuLine } from "react-icons/ri";
 import { useMenuDrawer } from "../../contexts/MenuDrawerContext";
@@ -8,7 +15,6 @@ import { Logo } from "./Logo";
 import { SidebarNav } from "./Sidebar/SidebarNav";
 import styles from "./styles.module.scss";
 import { Link } from "../Link";
-import { theme } from "../../styles/theme";
 
 export function Header() {
   const { onOpen } = useMenuDrawer();
@@ -20,7 +26,13 @@ export function Header() {
   });
 
   return (
-    <header className={styles.headerContainer}>
+    <Box
+      as="header"
+      h="5rem"
+      borderBottom="1px"
+      borderBottomStyle="solid"
+      borderBottomColor={colorMode === 'dark' ? "brand.gray.800" : "gray.100"}
+    >
       <Box className={styles.headerContent}>
         <Logo />
 
@@ -39,19 +51,25 @@ export function Header() {
 
         {isWideVersion ? <SidebarNav /> : <Sidebar />}
 
-        <Switch size='lg' onChange={toggleColorMode} isChecked={colorMode === 'light'} />
+        <Switch
+          size="lg"
+          onChange={toggleColorMode}
+          colorScheme="cyan"
+          isChecked={colorMode === "light"}
+        />
 
         {isWideVersion && (
-          <Link href="/posts" as="/posts">
+          <Link href="/posts">
             <Button
-              backgroundColor="gray.850"
+              backgroundColor={colorMode === 'dark' ? "brand.gray.850" : 'gray.400'}
               icon={FaNewspaper}
               text="See the latest posts"
-              iconColor="brand.green.500"
+              // textColor={colorMode === 'light' ? 'black' : undefined}
+              iconColor={colorMode === 'light' ? "white" : "brand.green.500"}
             />
           </Link>
         )}
       </Box>
-    </header>
+    </Box>
   );
 }
