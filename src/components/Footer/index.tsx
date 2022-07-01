@@ -1,15 +1,17 @@
-import { Box, Flex, SimpleGrid, Text, List } from "@chakra-ui/react";
+import { Box, Flex, SimpleGrid, Text, List, useColorMode } from "@chakra-ui/react";
 import { Logo } from "../Header/Logo";
 import { FooterTitle } from "./FooterTitle";
 import { FooterItem } from "./FooterItem";
 import { NewsletterSubscription } from "../NewsletterSubscription";
 
 export function Footer() {
+  const { colorMode } = useColorMode();
+
   return (
     <>
       <NewsletterSubscription />
 
-      <Box bgColor="black" px={["2rem", "6rem"]}>
+      <Box bgColor={colorMode === 'dark' ? 'black' : 'white'} px={["2rem", "6rem"]}>
         <Box py="2rem" fontSize="sm">
           <SimpleGrid columns={[1, 3]} spacing={10}>
             <Box display={["none", "block"]}>
@@ -51,7 +53,7 @@ export function Footer() {
         <Flex
           align="center"
           justify={["center", "flex-end"]}
-          color="gray.300"
+          color={colorMode === 'dark' ? 'brand.gray.300' : 'blackAlpha.700'}
           py="2rem"
           fontSize="sm"
         >
