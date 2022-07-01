@@ -3,7 +3,6 @@ import {
   useBreakpointValue,
   IconButton,
   Icon,
-  Switch,
   useColorMode,
 } from "@chakra-ui/react";
 import { FaNewspaper } from "react-icons/fa";
@@ -15,10 +14,11 @@ import { Logo } from "./Logo";
 import { SidebarNav } from "./Sidebar/SidebarNav";
 import styles from "./styles.module.scss";
 import { Link } from "../Link";
+import { ThemeSwitcher } from "./Sidebar/ThemeSwitcher";
 
 export function Header() {
   const { onOpen } = useMenuDrawer();
-  const { toggleColorMode, colorMode } = useColorMode();
+  const { colorMode } = useColorMode();
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -31,7 +31,7 @@ export function Header() {
       h="5rem"
       borderBottom="1px"
       borderBottomStyle="solid"
-      borderBottomColor={colorMode === 'dark' ? "brand.gray.800" : "gray.100"}
+      borderBottomColor={colorMode === "dark" ? "brand.gray.800" : "gray.100"}
     >
       <Box className={styles.headerContent}>
         <Logo />
@@ -39,7 +39,6 @@ export function Header() {
         {!isWideVersion && (
           <IconButton
             aria-label="Open navigation"
-            color="white"
             onClick={onOpen}
             fontSize="24"
             ml="auto"
@@ -51,23 +50,22 @@ export function Header() {
 
         {isWideVersion ? <SidebarNav /> : <Sidebar />}
 
-        <Switch
-          size="lg"
-          onChange={toggleColorMode}
-          colorScheme="cyan"
-          isChecked={colorMode === "light"}
-        />
-
         {isWideVersion && (
-          <Link href="/posts">
-            <Button
-              backgroundColor={colorMode === 'dark' ? "brand.gray.850" : 'gray.400'}
-              icon={FaNewspaper}
-              text="See the latest posts"
-              // textColor={colorMode === 'light' ? 'black' : undefined}
-              iconColor={colorMode === 'light' ? "white" : "brand.green.500"}
-            />
-          </Link>
+          <>
+            <Link href="/posts">
+              <Button
+                backgroundColor={
+                  colorMode === "dark" ? "brand.gray.850" : "gray.400"
+                }
+                icon={FaNewspaper}
+                text="See the latest posts"
+                iconColor={colorMode === "light" ? "white" : "brand.green.500"}
+                mr={3}
+              />
+            </Link>
+
+            <ThemeSwitcher />
+          </>
         )}
       </Box>
     </Box>
