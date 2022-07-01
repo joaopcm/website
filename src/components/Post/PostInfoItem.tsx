@@ -1,4 +1,4 @@
-import { Icon, Flex, Text } from "@chakra-ui/react";
+import { Icon, Flex, Text, useColorMode } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
 interface PostInfoItemProps {
@@ -7,8 +7,14 @@ interface PostInfoItemProps {
 }
 
 export function PostInfoItem({ icon, text }: PostInfoItemProps) {
+  const { colorMode } = useColorMode();
+
   return (
-    <Flex align="center" justify="center" color="gray.300">
+    <Flex
+      align="center"
+      justify="center"
+      color={colorMode === "dark" ? "brand.gray.300" : "blackAlpha.700"}
+    >
       <Icon as={icon} mr="0.65625rem" />
       <Text
         as="span"
