@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Heading, Stack, Button } from "@chakra-ui/react";
+import { Box, Flex, Text, Heading, Stack, Button, useColorMode } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -18,6 +18,7 @@ const subscribeFormSchema = yup.object().shape({
 });
 
 export function NewsletterSubscription() {
+  const { colorMode } = useColorMode();
   const { register, handleSubmit, formState, reset } = useForm({
     resolver: yupResolver(subscribeFormSchema),
   });
@@ -41,7 +42,7 @@ export function NewsletterSubscription() {
     <Flex
       px={["2rem", "4rem", "6rem"]}
       py="4rem"
-      bgColor="gray.600"
+      bgColor={colorMode === 'dark' ? 'gray.600' : 'blackAlpha.100'}
       textAlign="center"
       alignItems="center"
       justifyContent="center"
@@ -52,7 +53,7 @@ export function NewsletterSubscription() {
       </Heading>
       <Text
         as="p"
-        color="gray.200"
+        color={colorMode === 'dark' ? 'gray.200' : 'gray.500'}
         mt="0.5rem"
         mb="2rem"
         lineHeight="1.625rem"
@@ -71,9 +72,10 @@ export function NewsletterSubscription() {
             name="email"
             type="email"
             placeholder="Your awesome e-mail address"
-            bgColor="gray.200"
-            _hover={{ bgColor: "gray.200" }}
-            _focus={{ bgColor: "gray.200" }}
+            _placeholder={{ color: 'gray.500' }}
+            bgColor={colorMode === 'dark' ? 'gray.200' : 'white'}
+            _hover={{ bgColor: colorMode === 'dark' ? 'gray.200' : 'white' }}
+            _focus={{ bgColor: colorMode === 'dark' ? 'gray.200' : 'white' }}
             textColor="gray.500"
             {...register("email")}
             error={errors.email}
@@ -84,8 +86,9 @@ export function NewsletterSubscription() {
             type="submit"
             bg="brand.yellow.500"
             transition="filter 0.2s"
+            color="white"
             _hover={{
-              filter: "brightness(0.8)",
+              filter: `brightness(0.${colorMode === 'dark' ? 8 : 9})`,
             }}
             size="lg"
             isLoading={formState.isSubmitting}
