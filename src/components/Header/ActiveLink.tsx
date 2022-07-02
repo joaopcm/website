@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { cloneElement, ReactElement } from "react";
+import { checkIsActive } from "../../utils/checkIsActive";
 import { Link, LinkProps } from "../Link";
 
 interface ActiveLinkProps extends LinkProps {
@@ -14,20 +15,14 @@ export function ActiveLink({
   ...rest
 }: ActiveLinkProps) {
   const { asPath } = useRouter();
-  let isActive = false;
+  const isActive = checkIsActive({
+    shouldMatchExactHref,
+    asPath,
+    href: rest.href,
+    as: String(rest.as),
+  })
 
-  if (shouldMatchExactHref && (asPath === rest.href || asPath === rest.as)) {
-    isActive = true;
-  }
-
-  if (
-    !shouldMatchExactHref &&
-    (asPath.startsWith(String(rest.href)) || asPath.startsWith(String(rest.as)))
-  ) {
-    isActive = true;
-  }
-
-  let styles = {
+  const styles = {
     className: null,
     color: null,
   };
@@ -36,7 +31,7 @@ export function ActiveLink({
     if (activeClassName) {
       styles.className = activeClassName;
     } else {
-      styles.color = "yellow.500";
+      styles.color = "brand.yellow.500";
     }
   }
 

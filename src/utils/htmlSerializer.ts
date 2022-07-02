@@ -5,16 +5,21 @@ import {
   Image,
   ListItem,
   OrderedList,
+  Text,
   UnorderedList,
+  useColorMode,
 } from "@chakra-ui/react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+
+export const lightModeTextColor = "brand.gray.800";
 
 function propsWithUniqueKey(props, key) {
   return Object.assign(props || {}, { key });
 }
 
 export function htmlSerializer(type, element, content, children, key) {
+  const { colorMode } = useColorMode();
   let props = {};
 
   switch (type) {
@@ -32,6 +37,9 @@ export function htmlSerializer(type, element, content, children, key) {
       );
     case Elements.listItem:
     case Elements.oListItem:
+      props = {
+        color: colorMode === "light" ? lightModeTextColor : undefined,
+      };
       return createElement(ListItem, propsWithUniqueKey(props, key), children);
     case Elements.preformatted:
       props = {
@@ -63,6 +71,7 @@ export function htmlSerializer(type, element, content, children, key) {
         as: "h2",
         size: "xl",
         my: "1rem",
+        color: colorMode === "light" ? lightModeTextColor : undefined,
       };
 
       return createElement(Heading, propsWithUniqueKey(props, key), children);
@@ -71,6 +80,7 @@ export function htmlSerializer(type, element, content, children, key) {
         as: "h3",
         size: "lg",
         my: "1rem",
+        color: colorMode === "light" ? lightModeTextColor : undefined,
       };
 
       return createElement(Heading, propsWithUniqueKey(props, key), children);
@@ -79,6 +89,7 @@ export function htmlSerializer(type, element, content, children, key) {
         as: "h4",
         size: "md",
         my: "1rem",
+        color: colorMode === "light" ? lightModeTextColor : undefined,
       };
 
       return createElement(Heading, propsWithUniqueKey(props, key), children);
@@ -87,6 +98,7 @@ export function htmlSerializer(type, element, content, children, key) {
         as: "h5",
         size: "sm",
         my: "1rem",
+        color: colorMode === "light" ? lightModeTextColor : undefined,
       };
 
       return createElement(Heading, propsWithUniqueKey(props, key), children);
@@ -95,17 +107,24 @@ export function htmlSerializer(type, element, content, children, key) {
         as: "h6",
         size: "xs",
         my: "1rem",
+        color: colorMode === "light" ? lightModeTextColor : undefined,
       };
 
       return createElement(Heading, propsWithUniqueKey(props, key), children);
+    case Elements.paragraph:
+      props = {
+        color: colorMode === "light" ? lightModeTextColor : undefined,
+      };
+
+      return createElement(Text, propsWithUniqueKey(props, key), children);
     case Elements.image:
       props = {
         src: `${element.url}&q=25`,
         alt: element.alt,
         my: "2rem",
         fallbackSrc: "https://via.placeholder.com/500?text=Loading+image...",
-        width: 'auto',
-        height: 'auto',
+        width: "auto",
+        height: "auto",
       };
 
       return createElement(Image, propsWithUniqueKey(props, key));

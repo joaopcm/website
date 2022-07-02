@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import Prismic from "@prismicio/client";
 import { GetStaticProps } from "next";
-import { Center, Text } from "@chakra-ui/react";
+import { Center, Text, useColorMode } from "@chakra-ui/react";
 import { FiCalendar, FiUser } from "react-icons/fi";
 import { getPrismicClient } from "../../services/prismic";
 import { formatDate } from "../../utils/formatDate";
@@ -29,6 +29,8 @@ type Post = {
 };
 
 export default function Posts({ posts, preview }: PostsProps) {
+  const { colorMode } = useColorMode();
+
   return (
     <>
       <SEO
@@ -56,7 +58,14 @@ export default function Posts({ posts, preview }: PostsProps) {
                 >
                   {post.headline}
                 </Text>
-                <Text as="p" color="gray.300" mt="0.5rem" lineHeight="1.625rem">
+                <Text
+                  as="p"
+                  color={
+                    colorMode === "dark" ? "brand.gray.300" : "blackAlpha.700"
+                  }
+                  mt="0.5rem"
+                  lineHeight="1.625rem"
+                >
                   {post.subtitle}
                 </Text>
 

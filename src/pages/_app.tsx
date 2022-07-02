@@ -1,10 +1,10 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { theme } from "../styles/theme";
 import { MenuDrawerProvider } from "../contexts/MenuDrawerContext";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { theme } from "../styles/theme";
 
 function MyApp({ Component, pageProps }) {
   return (

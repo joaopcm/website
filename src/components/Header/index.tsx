@@ -1,4 +1,10 @@
-import { Box, useBreakpointValue, IconButton, Icon } from "@chakra-ui/react";
+import {
+  Box,
+  useBreakpointValue,
+  IconButton,
+  Icon,
+  useColorMode,
+} from "@chakra-ui/react";
 import { FaNewspaper } from "react-icons/fa";
 import { RiMenuLine } from "react-icons/ri";
 import { useMenuDrawer } from "../../contexts/MenuDrawerContext";
@@ -8,9 +14,11 @@ import { Logo } from "./Logo";
 import { SidebarNav } from "./Sidebar/SidebarNav";
 import styles from "./styles.module.scss";
 import { Link } from "../Link";
+import { ThemeSwitcher } from "./Sidebar/ThemeSwitcher";
 
 export function Header() {
   const { onOpen } = useMenuDrawer();
+  const { colorMode } = useColorMode();
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -18,14 +26,19 @@ export function Header() {
   });
 
   return (
-    <header className={styles.headerContainer}>
+    <Box
+      as="header"
+      h="5rem"
+      borderBottom="1px"
+      borderBottomStyle="solid"
+      borderBottomColor={colorMode === "dark" ? "brand.gray.800" : "gray.100"}
+    >
       <Box className={styles.headerContent}>
         <Logo />
 
         {!isWideVersion && (
           <IconButton
             aria-label="Open navigation"
-            color="white"
             onClick={onOpen}
             fontSize="24"
             ml="auto"
@@ -38,16 +51,23 @@ export function Header() {
         {isWideVersion ? <SidebarNav /> : <Sidebar />}
 
         {isWideVersion && (
-          <Link href="/posts" as="/posts">
-            <Button
-              backgroundColor="gray.850"
-              icon={FaNewspaper}
-              text="See the latest posts"
-              iconColor="#04d361"
-            />
-          </Link>
+          <>
+            <Link href="/posts">
+              <Button
+                backgroundColor={
+                  colorMode === "dark" ? "brand.gray.850" : "gray.400"
+                }
+                icon={FaNewspaper}
+                text="See the latest posts"
+                iconColor={colorMode === "light" ? "white" : "brand.green.500"}
+                mr={3}
+              />
+            </Link>
+
+            <ThemeSwitcher />
+          </>
         )}
       </Box>
-    </header>
+    </Box>
   );
 }

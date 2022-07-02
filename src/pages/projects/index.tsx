@@ -5,10 +5,11 @@ import {
   TagLabel,
   Box,
   useBreakpointValue,
+  useColorMode,
 } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import { FaJs, FaHtml5, FaPython, FaCss3 } from "react-icons/fa";
-import { SiTypescript, SiFlutter, SiShell } from "react-icons/si";
+import { SiTypescript, SiFlutter, SiShell, SiGo, SiHcl } from "react-icons/si";
 import { Container } from "../../components/Container";
 import { Content } from "../../components/Content";
 import { Link } from "../../components/Link";
@@ -44,24 +45,29 @@ export default function Projects({ projects }: ProjectsProps) {
     base: false,
     lg: true,
   });
+  const { colorMode } = useColorMode();
 
   const languageIcons = {
-    JavaScript: <Icon as={FaJs} />,
-    HTML: <Icon as={FaHtml5} />,
-    Python: <Icon as={FaPython} />,
-    CSS: <Icon as={FaCss3} />,
-    TypeScript: <Icon as={SiTypescript} />,
-    Dart: <Icon as={SiFlutter} />,
-    Shell: <Icon as={SiShell} />,
+    JavaScript: <Icon color="white" as={FaJs} />,
+    HTML: <Icon color="white" as={FaHtml5} />,
+    Python: <Icon color="white" as={FaPython} />,
+    CSS: <Icon color="white" as={FaCss3} />,
+    TypeScript: <Icon color="white" as={SiTypescript} />,
+    Dart: <Icon color="white" as={SiFlutter} />,
+    Shell: <Icon color="white" as={SiShell} />,
+    Go: <Icon color="white" as={SiGo} />,
+    HCL: <Icon color="white" as={SiHcl} />,
   };
   const languageColors = {
-    JavaScript: "yellow.400",
-    HTML: "red.600",
-    Python: "blue.500",
-    CSS: "blue.500",
-    TypeScript: "blue.500",
-    Dart: "blue.500",
-    Shell: "green.500",
+    JavaScript: 'yellow.400',
+    HTML: 'red.600',
+    Python: 'blue.500',
+    CSS: 'blue.500',
+    TypeScript: 'blue.500',
+    Dart: 'blue.500',
+    Shell: 'brand.green.500',
+    Go: 'brand.blue.500',
+    HCL: 'brand.purple.500',
   };
 
   return (
@@ -73,51 +79,74 @@ export default function Projects({ projects }: ProjectsProps) {
 
       <Container>
         <Content className={styles.projectsWrapper}>
-          {projects.map((project) => (
-            <Link
-              key={project.id}
-              href={project.url}
-              as={project.url}
-              isExternal
-              display="block"
-              _hover={{ textDecoration: "none" }}
-            >
-              <Text
-                as="time"
-                fontSize="1rem"
-                display="flex"
-                align="center"
-                color="gray.300"
-              >
-                {project.updatedAt}
-              </Text>
-              <Text
-                as="strong"
-                fontSize="1.5rem"
-                mt="1rem"
-                display="block"
-                lineHeight="2rem"
-                transition="color 0.2s"
-              >
-                {project.name}
-              </Text>
-              <Tag bg={languageColors[project.language]} mt="0.5rem">
-                {languageIcons[project.language]}
-                <TagLabel ml="1">{project.language}</TagLabel>
-              </Tag>
-
-              {project.description && (
-                <Text as="p" color="gray.300" mt="0.5rem" lineHeight="1.625rem">
-                  {project.description}
-                </Text>
+          {projects.map((project, index) => (
+            <>
+              {projects[index - 1] && (
+                <Box
+                  borderTop="1px"
+                  borderTopColor={colorMode === 'dark' ? 'brand.gray.800' : 'blackAlpha.300'}
+                  borderTopStyle="solid"
+                  marginTop="2rem"
+                  paddingTop="2rem"
+                ></Box>
               )}
-            </Link>
+
+              <Link
+                key={project.id}
+                href={project.url}
+                as={project.url}
+                isExternal
+                display="block"
+                _hover={{ textDecoration: "none" }}
+              >
+                <Text
+                  as="time"
+                  fontSize="1rem"
+                  display="flex"
+                  align="center"
+                  color={
+                    colorMode === "dark" ? "brand.gray.300" : "blackAlpha.700"
+                  }
+                >
+                  {project.updatedAt}
+                </Text>
+                <Text
+                  as="strong"
+                  fontSize="1.5rem"
+                  mt="1rem"
+                  display="block"
+                  lineHeight="2rem"
+                  transition="color 0.2s"
+                >
+                  {project.name}
+                </Text>
+                <Tag bg={languageColors[project.language]} mt="0.5rem">
+                  {languageIcons[project.language]}
+                  <TagLabel ml="1" color="white">
+                    {project.language}
+                  </TagLabel>
+                </Tag>
+
+                {project.description && (
+                  <Text
+                    as="p"
+                    color={
+                      colorMode === "dark" ? "brand.gray.300" : "blackAlpha.700"
+                    }
+                    mt="0.5rem"
+                    lineHeight="1.625rem"
+                  >
+                    {project.description}
+                  </Text>
+                )}
+              </Link>
+            </>
           ))}
 
           <Box
             p={["1rem", "2rem"]}
             textAlign="center"
-            bg="gray.850"
+            bg={colorMode === 'dark' ? 'brand.gray.850' : 'blackAlpha.100'}
             borderRadius="100px"
             fontSize={["1.125rem", "1.25rem"]}
             fontWeight="bold"
@@ -130,7 +159,7 @@ export default function Projects({ projects }: ProjectsProps) {
             )}
             <Link
               href="https://github.com/joaopcm"
-              color="yellow.500"
+              color="brand.yellow.500"
               ml="0.5rem"
               _hover={{ textDecoration: "none" }}
               isExternal

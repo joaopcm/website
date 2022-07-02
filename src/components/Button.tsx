@@ -3,6 +3,7 @@ import {
   Icon,
   Text,
   ButtonProps as ChakraButtonProps,
+  useColorMode,
 } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
@@ -24,6 +25,8 @@ export function Button({
   textColor = "white",
   ...rest
 }: ButtonProps) {
+  const { colorMode } = useColorMode();
+
   return (
     <ChakraButton
       type="button"
@@ -39,7 +42,7 @@ export function Button({
       fontWeight="bold"
       transition="filter 0.2s"
       _hover={{
-        filter: "brightness(0.8)",
+        filter: `brightness(0.${colorMode === 'light' ? 9 : 8})`,
       }}
       onClick={onClick}
       {...rest}

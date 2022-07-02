@@ -1,8 +1,8 @@
 import { Box, Stack, useBreakpointValue } from "@chakra-ui/react";
 import { FaHome, FaNewspaper, FaProjectDiagram } from "react-icons/fa";
-import { BsFillPersonFill } from "react-icons/bs";
 import { NavSection } from "./NavSection";
 import { NavLink } from "./NavLink";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 import styles from "../styles.module.scss";
 
 export function SidebarNav() {
@@ -57,6 +57,7 @@ export function SidebarNav() {
             )}
           </NavSection>
         ))}
+        <ThemeSwitcher />
       </Stack>
     );
   }

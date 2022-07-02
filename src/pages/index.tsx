@@ -44,7 +44,7 @@ export default function Home() {
             mt={["1.5rem", "2.5rem"]}
           >
             Know me and{" "}
-            <Text color="cyan.500" as="span">
+            <Text color="brand.cyan.500" as="span">
               share
             </Text>{" "}
             knowledge.
@@ -57,7 +57,7 @@ export default function Home() {
             mb={["1.5rem", "2.5rem"]}
           >
             Get access to all the posts <br />
-            <Text color="cyan.500" fontWeight="bold" mt="0.5rem" as="span">
+            <Text color="brand.cyan.500" fontWeight="bold" mt="0.5rem" as="span">
               for free
             </Text>
           </Text>
@@ -68,7 +68,7 @@ export default function Home() {
               w={["100%", "260px"]}
               border="0"
               borderRadius="2rem"
-              bg="yellow.500"
+              bg="brand.yellow.500"
               color="gray.900"
               fontSize="1.12rem"
               fontWeight="bold"

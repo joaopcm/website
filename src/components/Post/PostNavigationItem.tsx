@@ -23,7 +23,7 @@ export function PostNavigationItem({
         <Link href="/posts/[slug]" as={`/posts/${post.slug}`}>
           <VStack alignItems={alignItems}>
             <Text fontSize="1.125rem">{post.headline}</Text>
-            <Text color="yellow.500" fontWeight="bold">
+            <Text color="brand.yellow.500" fontWeight="bold">
               {description}
             </Text>
           </VStack>

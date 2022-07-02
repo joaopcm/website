@@ -6,6 +6,7 @@ import {
   useBreakpointValue,
   Divider,
   Center,
+  useColorMode,
 } from "@chakra-ui/react";
 import { format } from "date-fns";
 import { GetServerSideProps } from "next";
@@ -16,7 +17,7 @@ import Prismic from "@prismicio/client";
 import { SEO } from "../../components/SEO";
 import { getPrismicClient } from "../../services/prismic";
 import { formatDate } from "../../utils/formatDate";
-import { htmlSerializer } from "../../utils/htmlSerializer";
+import { htmlSerializer, lightModeTextColor } from "../../utils/htmlSerializer";
 import { Container } from "../../components/Container";
 import { Content } from "../../components/Content";
 import { PostInfo } from "../../components/Post/PostInfo";
@@ -35,7 +36,7 @@ interface PostProps {
       dimensions: {
         width: number;
         height: number;
-      }
+      };
     };
     headline: string;
     subtitle: string;
@@ -70,8 +71,9 @@ export default function Post({
     base: false,
     lg: true,
   });
+  const { colorMode } = useColorMode();
 
-  const optimizedImageUrl = `${post.banner.url}&q=25`
+  const optimizedImageUrl = `${post.banner.url}&q=25`;
 
   return (
     <>
@@ -111,7 +113,13 @@ export default function Post({
             </PostInfo>
 
             <Box mt="1.125rem">
-              <Text as="em" color="gray.300" fontSize="0.875rem">
+              <Text
+                as="em"
+                color={
+                  colorMode === "dark" ? "brand.gray.300" : "blackAlpha.700"
+                }
+                fontSize="0.875rem"
+              >
                 {post.updatedAt}
               </Text>
             </Box>
@@ -121,11 +129,17 @@ export default function Post({
               mt="4.125rem"
               lineHeight={["1.5rem", "2rem"]}
               fontSize={["1rem", "1.125rem"]}
-              color="gray.100"
+              color="brand.gray.100"
             >
               {post.details.map((detail, index) => (
                 <Box key={index}>
-                  <Heading as="h1" fontSize={["4xl", "5xl"]}>
+                  <Heading
+                    as="h1"
+                    fontSize={["4xl", "5xl"]}
+                    color={
+                      colorMode === "light" ? lightModeTextColor : undefined
+                    }
+                  >
                     {detail.heading}
                   </Heading>
 
@@ -138,7 +152,13 @@ export default function Post({
             </Box>
           </Text>
 
-          <Divider borderColor="gray.800" mt="3.75rem" mb="3.125rem" />
+          <Divider
+            borderColor={
+              colorMode === "dark" ? "brand.gray.800" : "blackAlpha.300"
+            }
+            mt="3.75rem"
+            mb="3.125rem"
+          />
 
           {(previousPost || nextPost) && (
             <PostNavigation
@@ -154,7 +174,7 @@ export default function Post({
                 <Button
                   text="Exit preview mode"
                   backgroundColor="white"
-                  textColor="gray.900"
+                  textColor="brand.gray.900"
                 />
               </Link>
             </Center>
@@ -219,7 +239,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     banner: {
       alt: response.data.banner.alt,
       url: response.data.banner.url,
-      dimensions: response.data.banner.dimensions
+      dimensions: response.data.banner.dimensions,
     },
     headline: response.data.headline,
     subtitle: response.data.subtitle,
