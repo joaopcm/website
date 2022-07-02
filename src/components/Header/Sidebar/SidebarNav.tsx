@@ -63,7 +63,7 @@ export function SidebarNav() {
   }
 
   return (
-    <Box as="nav">
+    <Box as="nav" className={styles.navbar}>
       {routes.map((route) => (
         <NavLink
           key={route.path}

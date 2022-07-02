@@ -37,8 +37,12 @@
       }
     }
   }
+}
 
-  a:not(:first-child) {
-    margin-left: auto;
-  }
+.navbar {
+  margin: 0 auto;
+}
+
+.navbar > a {
+  margin-left: auto;
 }
