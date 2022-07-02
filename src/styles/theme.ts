@@ -21,6 +21,12 @@ export const theme = extendTheme({
       green: {
         "500": "#04d361",
       },
+      blue: {
+        "500": "#007d9c",
+      },
+      purple: {
+        "500": "#844fba",
+      }
     },
     gray: {
       "800": "#121214",
@@ -30,12 +36,4 @@ export const theme = extendTheme({
     heading: "Roboto",
     body: "Roboto",
   },
-  // styles: {
-  //   global: {
-  //     body: {
-  //       bg: "gray.900",
-  //       color: "white",
-  //     },
-  //   },
-  // },
 });
