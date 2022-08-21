@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Text,
   Icon,
@@ -59,15 +60,15 @@ export default function Projects({ projects }: ProjectsProps) {
     HCL: <Icon color="white" as={SiHcl} />,
   };
   const languageColors = {
-    JavaScript: 'yellow.400',
-    HTML: 'red.600',
-    Python: 'blue.500',
-    CSS: 'blue.500',
-    TypeScript: 'blue.500',
-    Dart: 'blue.500',
-    Shell: 'brand.green.500',
-    Go: 'brand.blue.500',
-    HCL: 'brand.purple.500',
+    JavaScript: "yellow.400",
+    HTML: "red.600",
+    Python: "blue.500",
+    CSS: "blue.500",
+    TypeScript: "blue.500",
+    Dart: "blue.500",
+    Shell: "brand.green.500",
+    Go: "brand.blue.500",
+    HCL: "brand.purple.500",
   };
 
   return (
@@ -80,11 +81,13 @@ export default function Projects({ projects }: ProjectsProps) {
       <Container>
         <Content className={styles.projectsWrapper}>
           {projects.map((project, index) => (
-            <>
+            <React.Fragment key={project.id}>
               {projects[index - 1] && (
                 <Box
                   borderTop="1px"
-                  borderTopColor={colorMode === 'dark' ? 'brand.gray.800' : 'blackAlpha.300'}
+                  borderTopColor={
+                    colorMode === "dark" ? "brand.gray.800" : "blackAlpha.300"
+                  }
                   borderTopStyle="solid"
                   marginTop="2rem"
                   paddingTop="2rem"
@@ -92,7 +95,6 @@ export default function Projects({ projects }: ProjectsProps) {
               )}
 
               <Link
-                key={project.id}
                 href={project.url}
                 as={project.url}
                 isExternal
@@ -140,13 +142,13 @@ export default function Projects({ projects }: ProjectsProps) {
                   </Text>
                 )}
               </Link>
-            </>
+            </React.Fragment>
           ))}
 
           <Box
             p={["1rem", "2rem"]}
             textAlign="center"
-            bg={colorMode === 'dark' ? 'brand.gray.850' : 'blackAlpha.100'}
+            bg={colorMode === "dark" ? "brand.gray.850" : "blackAlpha.100"}
             borderRadius="100px"
             fontSize={["1.125rem", "1.25rem"]}
             fontWeight="bold"
